@@ -78,7 +78,21 @@ function initLoginPage() {
 
             if (data.success) {
                 // Salva dados no localStorage
-                localStorage.setItem('usuario', JSON.stringify(data.usuario));
+               // Corrige estrutura: usuário está dentro de data.data.usuario
+                if (data.data && data.data.usuario) {
+                    const usuario = data.data.usuario;
+                    const token = data.data.token;
+
+                    localStorage.setItem('usuario', JSON.stringify(usuario));
+                    localStorage.setItem('token', token);
+
+                    window.location.href = "dashboard.html";
+                } else {
+                    console.error("⚠️ Backend NÃO enviou 'usuario'. Resposta:", data);
+                    showMessage("Erro no servidor: dados do usuário não retornados", "error");
+                    return;
+                }
+
                 localStorage.setItem('token', data.token || 'logged');
                 
                 showMessage('Login realizado com sucesso! Redirecionando...', 'success');

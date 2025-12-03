@@ -41,21 +41,35 @@ document.addEventListener('DOMContentLoaded', function() {
 async function checkAuth() {
     // Verifica se tem usuário no localStorage
     const usuarioData = localStorage.getItem('usuario');
-    
-    if (!usuarioData) {
+
+    // Se não existe ou é "undefined" ou é vazio → desloga
+    if (!usuarioData || usuarioData === "undefined" || usuarioData === "null") {
+        localStorage.removeItem('usuario');
+        localStorage.removeItem('token');
         window.location.href = 'login.html';
         return;
     }
-    
-    currentUser = JSON.parse(usuarioData);
-    
+
+    let parsedUser;
+    try {
+        parsedUser = JSON.parse(usuarioData);
+    } catch (e) {
+        console.error("Erro ao parsear usuário:", usuarioData);
+        localStorage.removeItem('usuario');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    currentUser = parsedUser;
+
     // Atualiza interface com dados do usuário
     document.getElementById('userName').textContent = currentUser.nome.split(' ')[0];
     document.getElementById('welcomeName').textContent = currentUser.nome.split(' ')[0];
-    
+
     // Carrega serviços
     loadServices();
 }
+
 
 async function logout() {
     try {
@@ -83,21 +97,43 @@ async function loadServices() {
     try {
         const response = await fetch(`${API_URL}?action=listar-servicos`, {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            mode: 'cors',
+            credentials: 'include'
         });
         
-        const data = await response.json();
+        // Verifica se a resposta está OK
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Pega o texto da resposta primeiro
+        const text = await response.text();
+        console.log('Resposta da API:', text);
+        
+        // Tenta fazer parse do JSON
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            console.error('Resposta não é JSON válido:', text);
+            throw new Error('Resposta inválida do servidor');
+        }
         
         if (data.success) {
             allServices = data.data || [];
+            console.log('Serviços carregados:', allServices);
             populateCityFilter();
             displayServices(allServices);
         } else {
-            showError('Erro ao carregar serviços');
+            showError(data.message || 'Erro ao carregar serviços');
         }
     } catch (error) {
-        console.error('Erro:', error);
-        showError('Erro ao conectar com servidor');
+        console.error('Erro completo:', error);
+        showError('Erro ao conectar com servidor: ' + error.message);
     } finally {
         showLoading(false);
     }

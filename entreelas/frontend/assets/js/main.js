@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const nav = document.getElementById('nav');
     
-    if (mobileMenuToggle) {
+    if (mobileMenuToggle && nav) {
         mobileMenuToggle.addEventListener('click', function() {
             nav.classList.toggle('active');
             this.classList.toggle('active');
@@ -54,20 +54,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Header transparente ao rolar
-    let lastScroll = 0;
     const header = document.querySelector('.header');
     
-    window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset;
+    if (header) {
+        let lastScroll = 0;
         
-        if (currentScroll > 100) {
-            header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
-        } else {
-            header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
-        }
-        
-        lastScroll = currentScroll;
-    });
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+    }
     
     // Formulários - Prevenir envio padrão
     const forms = document.querySelectorAll('form');
