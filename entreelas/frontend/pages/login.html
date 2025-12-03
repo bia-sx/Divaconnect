@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar - EntreElas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <h1 class="logo-text">Entre<span class="logo-highlight">Elas</span></h1>
+            </a>
+            
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Início</a>
+                <a href="../index.html#como-funciona" class="nav-link">Como Funciona</a>
+                <a href="../index.html#servicos" class="nav-link">Serviços</a>
+            </nav>
+
+            <div class="header-buttons">
+                <a href="cadastro.html" class="btn-cadastrar">Criar Conta</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="login-section">
+        <div class="container">
+            <div class="login-container">
+                <!-- Lado Esquerdo - Informações -->
+                <div class="login-info">
+                    <div class="info-content">
+                        <h2 class="info-title">Bem-vinda de volta! 💜</h2>
+                        <p class="info-description">
+                            Entre na sua conta e continue conectada com a maior 
+                            comunidade de mulheres profissionais do Brasil.
+                        </p>
+                        
+                        <div class="info-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✨</span>
+                                <div>
+                                    <h4>Acesso Rápido</h4>
+                                    <p>Encontre profissionais em segundos</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🛡️</span>
+                                <div>
+                                    <h4>100% Seguro</h4>
+                                    <p>Seus dados protegidos sempre</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">💬</span>
+                                <div>
+                                    <h4>Suporte Dedicado</h4>
+                                    <p>Estamos aqui para ajudar você</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lado Direito - Formulário -->
+                <div class="login-form-container">
+                    <div class="form-card">
+                        <h1 class="form-title">Entrar na sua conta</h1>
+                        <p class="form-subtitle">Digite seus dados para acessar</p>
+
+                        <form id="loginForm" class="form">
+                            <div id="messageContainer"></div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    class="form-input" 
+                                    placeholder="seu@email.com"
+                                    required
+                                    aria-required="true"
+                                >
+                                <span class="form-error" id="emailError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="senha" class="form-label">Senha</label>
+                                <div class="password-wrapper">
+                                    <input 
+                                        type="password" 
+                                        id="senha" 
+                                        name="senha" 
+                                        class="form-input" 
+                                        placeholder="Digite sua senha"
+                                        required
+                                        aria-required="true"
+                                        minlength="8"
+                                    >
+                                    <button type="button" class="toggle-password" id="togglePassword">
+                                        👁️
+                                    </button>
+                                </div>
+                                <span class="form-error" id="senhaError"></span>
+                            </div>
+
+                            <div class="form-options">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" id="lembrar" name="lembrar">
+                                    <span class="checkmark"></span>
+                                    Lembrar de mim
+                                </label>
+                                <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                            </div>
+
+                            <button type="submit" class="btn-submit" id="btnSubmit">
+                                <span id="btnText">Entrar</span>
+                                <span id="btnLoader" class="loader" style="display: none;"></span>
+                            </button>
+
+                            <div class="form-footer">
+                                <p>Ainda não tem uma conta? 
+                                    <a href="cadastro.html" class="link-primary">Cadastre-se grátis</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2025 EntreElas. Feito com ❤️ de mulheres para mulheres.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+</body>
+</html>

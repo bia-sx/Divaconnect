@@ -1,0 +1,28 @@
+# Habilita rewrite engine
+RewriteEngine On
+
+# Define o diretório base
+RewriteBase /entreelas/backend/
+
+# Se o arquivo ou diretório existe, serve diretamente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redireciona todas as requisições para api.php
+RewriteRule ^(.*)$ api.php?request=$1 [QSA,L]
+
+# Headers de segurança e CORS
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Desabilita listagem de diretórios
+Options -Indexes
+
+# Define charset padrão
+AddDefaultCharset UTF-8

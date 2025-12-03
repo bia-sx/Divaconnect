@@ -1,0 +1,129 @@
+/* Estilos específicos do cadastro */
+.btn-entrar-header {
+    padding: 10px 24px;
+    background-color: transparent;
+    border: 2px solid #E85D4E;
+    border-radius: 8px;
+    color: #E85D4E;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-entrar-header:hover {
+    background-color: #E85D4E;
+    color: white;
+}
+
+.cadastro-section {
+    padding: 80px 0;
+}
+
+.form-card {
+    max-width: 550px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+/* Prestadora Section */
+.prestadora-section {
+    background-color: #FFF5F3;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #FFE8E3;
+}
+
+.prestadora-checkbox {
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.prestadora-checkbox input[type="checkbox"] {
+    margin-top: 4px;
+}
+
+.prestadora-checkbox strong {
+    font-size: 16px;
+    color: #1a1a1a;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.checkbox-description {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+}
+
+.checkmark-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #E85D4E;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+input[type="checkbox"]:checked + .checkmark-custom {
+    background-color: #E85D4E;
+    position: relative;
+}
+
+input[type="checkbox"]:checked + .checkmark-custom::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Campos de Prestadora */
+.prestadora-fields {
+    background-color: #F8F9FA;
+    padding: 24px;
+    border-radius: 12px;
+    border: 2px solid #E5E5E5;
+    animation: slideDown 0.3s ease-out;
+}
+
+.terms-text {
+    font-size: 13px;
+    color: #666;
+}
+
+/* Select customizado */
+select.form-input {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .cadastro-section {
+        padding: 40px 0;
+    }
+}
