@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - EntreElas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-dashboard">
+        <div class="container">
+            <a href="dashboard.html" class="logo">
+                <div class="logo-icon">❤️</div>
+                <h1 class="logo-text">Entre<span class="logo-highlight">Elas</span></h1>
+            </a>
+            
+            <nav class="nav-dashboard">
+                <a href="dashboard.html" class="nav-link active">🏠 Início</a>
+                <a href="meus-servicos.html" class="nav-link">💼 Meus Serviços</a>
+                <a href="solicitacoes.html" class="nav-link">📋 Solicitações</a>
+                <a href="perfil.html" class="nav-link">👤 Perfil</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="user-info" id="userInfo">
+                    <span class="user-avatar">👤</span>
+                    <span class="user-name" id="userName">Carregando...</span>
+                </div>
+                <button class="btn-logout" id="btnLogout">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Dashboard -->
+    <section class="hero-dashboard">
+        <div class="container">
+            <h2 class="hero-title">Olá, <span id="welcomeName">bem-vinda</span>! 👋</h2>
+            <p class="hero-subtitle">Encontre profissionais qualificadas ou gerencie seus serviços</p>
+            
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="Buscar por serviço, profissional ou cidade..."
+                >
+                <button class="search-btn" id="btnSearch">🔍 Buscar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters">
+                <select id="filterCategoria" class="filter-select">
+                    <option value="">Todas as categorias</option>
+                    <option value="Eletricista">Eletricista</option>
+                    <option value="Babá">Babá</option>
+                    <option value="Diarista">Diarista</option>
+                    <option value="Cozinheira">Cozinheira</option>
+                    <option value="Cuidadora de Idosos">Cuidadora de Idosos</option>
+                    <option value="Manicure">Manicure</option>
+                    <option value="Costureira">Costureira</option>
+                    <option value="Personal Trainer">Personal Trainer</option>
+                    <option value="Psicóloga">Psicóloga</option>
+                    <option value="Encanadora">Encanadora</option>
+                    <option value="Pintora">Pintora</option>
+                    <option value="Jardineira">Jardineira</option>
+                </select>
+
+                <select id="filterCidade" class="filter-select">
+                    <option value="">Todas as cidades</option>
+                </select>
+
+                <button class="btn-clear-filters" id="btnClearFilters">Limpar Filtros</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços Disponíveis -->
+    <section class="services-section">
+        <div class="container">
+            <h3 class="section-title">Serviços Disponíveis</h3>
+            
+            <div id="loadingServices" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Carregando serviços...</p>
+            </div>
+
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <span class="empty-icon">🔍</span>
+                <h4>Nenhum serviço encontrado</h4>
+                <p>Tente ajustar os filtros ou buscar por outros termos</p>
+            </div>
+
+            <div id="servicesGrid" class="services-grid">
+                <!-- Serviços serão inseridos aqui via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Solicitação -->
+    <div id="modalSolicitacao" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Solicitar Serviço</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="service-info" id="modalServiceInfo">
+                    <!-- Info do serviço será inserida aqui -->
+                </div>
+
+                <form id="formSolicitacao">
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem (opcional)</label>
+                        <textarea 
+                            id="mensagem" 
+                            name="mensagem" 
+                            rows="4" 
+                            class="form-input"
+                            placeholder="Descreva o que você precisa, horários disponíveis, etc..."
+                        ></textarea>
+                    </div>
+
+                    <div id="modalMessage"></div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" id="btnCancelar">Cancelar</button>
+                        <button type="submit" class="btn-primary" id="btnEnviarSolicitacao">
+                            <span id="btnSolicitarText">Enviar Solicitação</span>
+                            <span id="btnSolicitarLoader" class="loader" style="display: none;"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+</body>
+</html>

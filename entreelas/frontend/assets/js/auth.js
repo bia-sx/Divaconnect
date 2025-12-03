@@ -1,5 +1,5 @@
 // Configuração da API
-const API_URL = 'http://localhost/entreelas/backend/api.php';
+const API_URL = '/Divaconnect/entreelas/backend/api.php';
 
 // Aguarda o DOM carregar
 document.addEventListener('DOMContentLoaded', function() {

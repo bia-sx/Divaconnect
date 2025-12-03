@@ -89,7 +89,7 @@
 .login-info {
     display: flex;
     align-items: center;
-    margin-bottom: 104%;
+    margin-bottom: 144%;
 }
 
 .info-content {
@@ -148,9 +148,10 @@
 }
 
 /* Form Container */
-.login-form-container {
+.login-form-container{
     display: flex;
     justify-content: center;
+    margin-top: -12%;
 }
 
 .form-card {

@@ -3,11 +3,27 @@
  * API EntreElas - Ponto de entrada principal
  */
 
-// Habilita CORS - Configuração mais permissiva
-header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
-header('Access-Control-Allow-Origin: *'); // Para permitir qualquer origem
+// Habilita CORS - Configuração específica para desenvolvimento
+$allowed_origins = [
+    'http://127.0.0.1:5500',
+    'http://localhost:5500',
+    'http://127.0.0.1:5501',
+    'http://localhost:5501',
+    'http://localhost',
+    'http://127.0.0.1'
+];
+
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+if (in_array($origin, $allowed_origins)) {
+    header("Access-Control-Allow-Origin: $origin");
+} else {
+    header('Access-Control-Allow-Origin: *');
+}
+
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Max-Age: 86400');
 header('Content-Type: application/json; charset=UTF-8');
 
@@ -24,6 +40,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Imports
 require_once __DIR__ . '/controllers/AuthController.php';
+require_once __DIR__ . '/controllers/ServicoController.php';
+require_once __DIR__ . '/controllers/SolicitacaoController.php';
 require_once __DIR__ . '/utils/response.php';
 
 // Pega o método HTTP
@@ -75,6 +93,24 @@ try {
             $authController = new AuthController();
             $usuarioId = $authController->verificarAutenticacao();
             sendSuccess(['usuario_id' => $usuarioId], 'Autenticado');
+            break;
+
+        // ========== SERVIÇOS ==========
+        case 'listar-servicos':
+            if ($method !== 'GET') {
+                sendError('Método não permitido', 405);
+            }
+            $servicoController = new ServicoController();
+            $servicoController->listarServicos();
+            break;
+
+        // ========== SOLICITAÇÕES ==========
+        case 'solicitar-servico':
+            if ($method !== 'POST') {
+                sendError('Método não permitido', 405);
+            }
+            $solicitacaoController = new SolicitacaoController();
+            $solicitacaoController->solicitarServico($data);
             break;
 
         // ========== DEFAULT ==========
