@@ -82,6 +82,23 @@ class AuthController {
             if ($stmt->execute()) {
                 $usuarioId = $this->conn->lastInsertId();
                 
+                // Se é prestadora E tem área de atuação, cria um serviço inicial automaticamente
+                if ($ehPrestadora && $areaAtuacao) {
+                    $tituloServico = "Serviço de " . $areaAtuacao;
+                    $descricaoServico = $descricaoProfissional ?: "Profissional de " . $areaAtuacao . " oferecendo serviços de qualidade.";
+                    
+                    $queryServico = "INSERT INTO servicos (usuario_id, titulo, descricao, categoria, localizacao, ativo) 
+                                     VALUES (:usuario_id, :titulo, :descricao, :categoria, :localizacao, 1)";
+                    
+                    $stmtServico = $this->conn->prepare($queryServico);
+                    $stmtServico->bindParam(':usuario_id', $usuarioId, PDO::PARAM_INT);
+                    $stmtServico->bindParam(':titulo', $tituloServico);
+                    $stmtServico->bindParam(':descricao', $descricaoServico);
+                    $stmtServico->bindParam(':categoria', $areaAtuacao);
+                    $stmtServico->bindParam(':localizacao', $cidade);
+                    $stmtServico->execute();
+                }
+                
                 sendSuccess([
                     'usuario_id' => $usuarioId
                 ], 'Cadastro realizado com sucesso!', 201);

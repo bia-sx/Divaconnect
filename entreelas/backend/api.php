@@ -104,6 +104,38 @@ try {
             $servicoController->listarServicos();
             break;
 
+        case 'meus-servicos':
+            if ($method !== 'GET') {
+                sendError('Método não permitido', 405);
+            }
+            $servicoController = new ServicoController();
+            $servicoController->meusServicos();
+            break;
+
+        case 'criar-servico':
+            if ($method !== 'POST') {
+                sendError('Método não permitido', 405);
+            }
+            $servicoController = new ServicoController();
+            $servicoController->criarServico($data);
+            break;
+
+        case 'atualizar-servico':
+            if ($method !== 'POST') {
+                sendError('Método não permitido', 405);
+            }
+            $servicoController = new ServicoController();
+            $servicoController->atualizarServico($data);
+            break;
+
+        case 'deletar-servico':
+            if ($method !== 'POST') {
+                sendError('Método não permitido', 405);
+            }
+            $servicoController = new ServicoController();
+            $servicoController->deletarServico($data);
+            break;
+
         // ========== SOLICITAÇÕES ==========
         case 'solicitar-servico':
             if ($method !== 'POST') {
