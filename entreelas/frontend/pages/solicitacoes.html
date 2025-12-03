@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitações - EntreElas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/solicitacoes.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-dashboard">
+        <div class="container">
+            <a href="dashboard.html" class="logo">
+                <div class="logo-icon">❤️</div>
+                <h1 class="logo-text">Entre<span class="logo-highlight">Elas</span></h1>
+            </a>
+            
+            <nav class="nav-dashboard">
+                <a href="dashboard.html" class="nav-link">Início</a>
+                <a href="meus-servicos.html" class="nav-link">Meus Serviços</a>
+                <a href="solicitacoes.html" class="nav-link active">Solicitações</a>
+                <a href="perfil.html" class="nav-link">Perfil</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="user-info" id="userInfo">
+                    <span class="user-avatar">👤</span>
+                    <span class="user-name" id="userName">Carregando...</span>
+                </div>
+                <button class="btn-logout" id="btnLogout">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="solicitacoes-section">
+        <div class="container">
+            <h2 class="page-title">Minhas Solicitações</h2>
+            
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="enviadas">
+                    📤 Solicitações Enviadas
+                </button>
+                <button class="tab-btn" data-tab="recebidas" id="tabRecebidas">
+                    📥 Solicitações Recebidas
+                </button>
+            </div>
+
+            <!-- Tab Content: Enviadas -->
+            <div class="tab-content active" id="tab-enviadas">
+                <div id="loadingEnviadas" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Carregando solicitações...</p>
+                </div>
+
+                <div id="emptyEnviadas" class="empty-state" style="display: none;">
+                    <span class="empty-icon">📭</span>
+                    <h4>Nenhuma solicitação enviada</h4>
+                    <p>Você ainda não solicitou nenhum serviço</p>
+                    <a href="dashboard.html" class="btn-primary">Explorar Serviços</a>
+                </div>
+
+                <div id="listEnviadas" class="solicitacoes-list"></div>
+            </div>
+
+            <!-- Tab Content: Recebidas -->
+            <div class="tab-content" id="tab-recebidas">
+                <div id="loadingRecebidas" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Carregando solicitações...</p>
+                </div>
+
+                <div id="emptyRecebidas" class="empty-state" style="display: none;">
+                    <span class="empty-icon">📭</span>
+                    <h4>Nenhuma solicitação recebida</h4>
+                    <p>Você ainda não recebeu solicitações nos seus serviços</p>
+                    <a href="meus-servicos.html" class="btn-primary">Gerenciar Serviços</a>
+                </div>
+
+                <div id="listRecebidas" class="solicitacoes-list"></div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../assets/js/solicitacoes.js"></script>
+</body>
+</html>

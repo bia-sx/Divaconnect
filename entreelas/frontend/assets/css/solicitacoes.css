@@ -1,0 +1,279 @@
+/* Solicitações Page */
+.solicitacoes-section {
+    padding: 60px 0;
+    background-color: #FAFAFA;
+    min-height: calc(100vh - 80px);
+}
+
+.page-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 40px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+    border-bottom: 2px solid #E5E5E5;
+}
+
+.tab-btn {
+    padding: 16px 32px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #666;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    bottom: -2px;
+}
+
+.tab-btn:hover {
+    color: #E85D4E;
+}
+
+.tab-btn.active {
+    color: #E85D4E;
+    border-bottom-color: #E85D4E;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Lista de Solicitações */
+.solicitacoes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.solicitacao-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: all 0.3s;
+    border-left: 4px solid #E5E5E5;
+}
+
+.solicitacao-card:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.solicitacao-card.pendente {
+    border-left-color: #FFA500;
+}
+
+.solicitacao-card.aceita {
+    border-left-color: #4CAF50;
+}
+
+.solicitacao-card.recusada {
+    border-left-color: #DC3545;
+}
+
+.solicitacao-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.solicitacao-info {
+    flex: 1;
+}
+
+.solicitacao-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.solicitacao-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-badge.pendente {
+    background-color: #FFF3E0;
+    color: #F57C00;
+}
+
+.status-badge.aceita {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+}
+
+.status-badge.recusada {
+    background-color: #FFEBEE;
+    color: #C62828;
+}
+
+.solicitacao-body {
+    margin-bottom: 16px;
+}
+
+.solicitacao-descricao {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.solicitacao-mensagem {
+    background-color: #F8F9FA;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #666;
+    border-left: 3px solid #E85D4E;
+}
+
+.solicitacao-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid #E5E5E5;
+}
+
+.solicitante-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.solicitante-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #E85D4E;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.solicitante-dados h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.solicitante-dados p {
+    font-size: 12px;
+    color: #999;
+}
+
+.solicitacao-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-action {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-aceitar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-aceitar:hover {
+    background-color: #45A049;
+}
+
+.btn-recusar {
+    background-color: #DC3545;
+    color: white;
+}
+
+.btn-recusar:hover {
+    background-color: #C82333;
+}
+
+.btn-contato {
+    background-color: #E85D4E;
+    color: white;
+}
+
+.btn-contato:hover {
+    background-color: #d54a3b;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 28px;
+    }
+
+    .tabs {
+        overflow-x: auto;
+    }
+
+    .tab-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .solicitacao-header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .solicitacao-footer {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    .solicitacao-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .btn-action {
+        width: 100%;
+    }
+}

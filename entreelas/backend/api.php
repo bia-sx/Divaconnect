@@ -113,6 +113,30 @@ try {
             $solicitacaoController->solicitarServico($data);
             break;
 
+        case 'minhas-solicitacoes':
+            if ($method !== 'GET') {
+                sendError('Método não permitido', 405);
+            }
+            $solicitacaoController = new SolicitacaoController();
+            $solicitacaoController->minhasSolicitacoes();
+            break;
+
+        case 'solicitacoes-recebidas':
+            if ($method !== 'GET') {
+                sendError('Método não permitido', 405);
+            }
+            $solicitacaoController = new SolicitacaoController();
+            $solicitacaoController->solicitacoesRecebidas();
+            break;
+
+        case 'responder-solicitacao':
+            if ($method !== 'POST') {
+                sendError('Método não permitido', 405);
+            }
+            $solicitacaoController = new SolicitacaoController();
+            $solicitacaoController->responderSolicitacao($data);
+            break;
+
         // ========== DEFAULT ==========
         default:
             sendError('Ação não encontrada', 404);

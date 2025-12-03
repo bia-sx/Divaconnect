@@ -83,5 +83,141 @@ class SolicitacaoController {
             sendError('Erro ao processar solicitação', 500);
         }
     }
+
+    /**
+     * Lista solicitações enviadas pela usuária
+     */
+    public function minhasSolicitacoes() {
+        try {
+            $authController = new AuthController();
+            $usuarioId = $authController->verificarAutenticacao();
+
+            $query = "SELECT 
+                        sol.id,
+                        sol.mensagem,
+                        sol.status,
+                        sol.data_solicitacao,
+                        s.titulo as servico_titulo,
+                        s.descricao as servico_descricao,
+                        s.preco_estimado,
+                        s.localizacao,
+                        u.nome as prestadora_nome,
+                        u.telefone as prestadora_telefone
+                      FROM solicitacoes sol
+                      INNER JOIN servicos s ON sol.servico_id = s.id
+                      INNER JOIN usuarios u ON s.usuario_id = u.id
+                      WHERE sol.cliente_id = :usuario_id
+                      ORDER BY sol.data_solicitacao DESC";
+            
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':usuario_id', $usuarioId, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            $solicitacoes = $stmt->fetchAll();
+            
+            sendSuccess($solicitacoes, 'Solicitações listadas com sucesso');
+
+        } catch (PDOException $e) {
+            error_log("Erro ao listar solicitações: " . $e->getMessage());
+            sendError('Erro ao listar solicitações', 500);
+        }
+    }
+
+    /**
+     * Lista solicitações recebidas pela prestadora
+     */
+    public function solicitacoesRecebidas() {
+        try {
+            $authController = new AuthController();
+            $usuarioId = $authController->verificarAutenticacao();
+
+            $query = "SELECT 
+                        sol.id,
+                        sol.mensagem,
+                        sol.status,
+                        sol.data_solicitacao,
+                        s.titulo as servico_titulo,
+                        s.descricao as servico_descricao,
+                        s.preco_estimado,
+                        s.localizacao,
+                        u.nome as cliente_nome,
+                        u.telefone as cliente_telefone
+                      FROM solicitacoes sol
+                      INNER JOIN servicos s ON sol.servico_id = s.id
+                      INNER JOIN usuarios u ON sol.cliente_id = u.id
+                      WHERE s.usuario_id = :usuario_id
+                      ORDER BY sol.data_solicitacao DESC";
+            
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':usuario_id', $usuarioId, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            $solicitacoes = $stmt->fetchAll();
+            
+            sendSuccess($solicitacoes, 'Solicitações listadas com sucesso');
+
+        } catch (PDOException $e) {
+            error_log("Erro ao listar solicitações: " . $e->getMessage());
+            sendError('Erro ao listar solicitações', 500);
+        }
+    }
+
+    /**
+     * Responde uma solicitação (aceitar/recusar)
+     */
+    public function responderSolicitacao($data) {
+        try {
+            $authController = new AuthController();
+            $usuarioId = $authController->verificarAutenticacao();
+
+            if (!isset($data['solicitacao_id']) || !isset($data['status'])) {
+                sendError('Dados incompletos', 400);
+            }
+
+            $solicitacaoId = intval($data['solicitacao_id']);
+            $status = $data['status'];
+
+            if (!in_array($status, ['aceita', 'recusada'])) {
+                sendError('Status inválido', 400);
+            }
+
+            // Verifica se a solicitação pertence a um serviço da usuária
+            $query = "SELECT sol.id 
+                      FROM solicitacoes sol
+                      INNER JOIN servicos s ON sol.servico_id = s.id
+                      WHERE sol.id = :solicitacao_id 
+                      AND s.usuario_id = :usuario_id
+                      AND sol.status = 'pendente'";
+            
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':solicitacao_id', $solicitacaoId, PDO::PARAM_INT);
+            $stmt->bindParam(':usuario_id', $usuarioId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            if ($stmt->rowCount() === 0) {
+                sendError('Solicitação não encontrada ou já respondida', 404);
+            }
+
+            // Atualiza status
+            $query = "UPDATE solicitacoes 
+                      SET status = :status, data_resposta = NOW()
+                      WHERE id = :solicitacao_id";
+            
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':status', $status);
+            $stmt->bindParam(':solicitacao_id', $solicitacaoId, PDO::PARAM_INT);
+            
+            if ($stmt->execute()) {
+                $message = $status === 'aceita' ? 'Solicitação aceita!' : 'Solicitação recusada';
+                sendSuccess([], $message);
+            } else {
+                sendError('Erro ao responder solicitação', 500);
+            }
+
+        } catch (PDOException $e) {
+            error_log("Erro ao responder solicitação: " . $e->getMessage());
+            sendError('Erro ao processar resposta', 500);
+        }
+    }
 }
 ?>
