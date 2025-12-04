@@ -1,14 +1,11 @@
-// Configuração da API
+
 const API_URL = '/Divaconnect/entreelas/backend/api.php';
 
-// Estado
 let currentUser = null;
 
-// Aguarda DOM carregar
 document.addEventListener('DOMContentLoaded', function() {
     checkAuth();
     
-    // Event listeners
     document.getElementById('btnLogout').addEventListener('click', logout);
     document.getElementById('btnUploadFoto').addEventListener('click', () => document.getElementById('inputFoto').click());
     document.getElementById('inputFoto').addEventListener('change', handleFotoUpload);
@@ -17,13 +14,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('formSenha').addEventListener('submit', alterarSenha);
     document.getElementById('btnExcluirConta').addEventListener('click', excluirConta);
     
-    // Máscara de telefone
     document.getElementById('telefone').addEventListener('input', function(e) {
         this.value = phoneMask(this.value);
     });
 });
 
-// ========== AUTENTICAÇÃO ==========
 
 function checkAuth() {
     const usuarioData = localStorage.getItem('usuario');
@@ -45,7 +40,6 @@ function logout() {
     window.location.href = 'login.html';
 }
 
-// ========== CARREGAR PERFIL ==========
 
 async function loadPerfil() {
     try {
@@ -70,13 +64,11 @@ async function loadPerfil() {
 }
 
 function preencherFormulario(usuario) {
-    // Dados pessoais
     document.getElementById('nome').value = usuario.nome;
     document.getElementById('email').value = usuario.email;
     document.getElementById('telefone').value = usuario.telefone;
     document.getElementById('cidade').value = usuario.cidade;
     
-    // Foto de perfil
     const iniciais = usuario.nome.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
     document.getElementById('iniciais').textContent = iniciais;
     
@@ -87,7 +79,6 @@ function preencherFormulario(usuario) {
         document.getElementById('btnRemoverFoto').style.display = 'block';
     }
     
-    // Se é prestadora
     if (usuario.eh_prestadora == 1) {
         document.getElementById('secaoPrestadora').style.display = 'block';
         document.getElementById('prestadoraBadge').style.display = 'flex';
@@ -96,20 +87,16 @@ function preencherFormulario(usuario) {
     }
 }
 
-// ========== UPLOAD DE FOTO ==========
-
 async function handleFotoUpload(e) {
     const file = e.target.files[0];
     
     if (!file) return;
     
-    // Valida tipo de arquivo
     if (!file.type.startsWith('image/')) {
         alert('Por favor, selecione uma imagem');
         return;
     }
     
-    // Valida tamanho (máximo 5MB)
     if (file.size > 5 * 1024 * 1024) {
         alert('A imagem deve ter no máximo 5MB');
         return;
@@ -128,7 +115,6 @@ async function handleFotoUpload(e) {
         const data = await response.json();
         
         if (data.success) {
-            // Atualiza preview
             const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById('fotoPerfil').src = e.target.result;
@@ -138,7 +124,6 @@ async function handleFotoUpload(e) {
             };
             reader.readAsDataURL(file);
             
-            // Atualiza localStorage
             currentUser.foto_perfil = data.data.foto_perfil;
             localStorage.setItem('usuario', JSON.stringify(currentUser));
             
@@ -184,7 +169,6 @@ async function removerFoto() {
     }
 }
 
-// ========== SALVAR PERFIL ==========
 
 async function salvarPerfil(e) {
     e.preventDefault();
@@ -196,13 +180,11 @@ async function salvarPerfil(e) {
         cidade: document.getElementById('cidade').value.trim()
     };
     
-    // Se é prestadora, inclui dados profissionais
     if (currentUser.eh_prestadora == 1) {
         formData.area_atuacao = document.getElementById('areaAtuacao').value;
         formData.descricao_profissional = document.getElementById('descricaoProfissional').value.trim();
     }
     
-    // Validações
     if (formData.nome.length < 3) {
         showFieldError('nomeError', 'Nome deve ter no mínimo 3 caracteres');
         return;
@@ -231,7 +213,6 @@ async function salvarPerfil(e) {
         const data = await response.json();
         
         if (data.success) {
-            // Atualiza localStorage
             Object.assign(currentUser, formData);
             localStorage.setItem('usuario', JSON.stringify(currentUser));
             
@@ -246,8 +227,6 @@ async function salvarPerfil(e) {
         setLoading('btnSalvar', false);
     }
 }
-
-// ========== ALTERAR SENHA ==========
 
 async function alterarSenha(e) {
     e.preventDefault();
@@ -300,7 +279,6 @@ async function alterarSenha(e) {
     }
 }
 
-// ========== EXCLUIR CONTA ==========
 
 async function excluirConta() {
     const confirmacao = prompt('Esta ação é PERMANENTE e não pode ser desfeita.\n\nDigite "EXCLUIR" para confirmar:');
@@ -330,8 +308,6 @@ async function excluirConta() {
         alert('Erro ao conectar com servidor');
     }
 }
-
-// ========== UTILIDADES ==========
 
 function showMessage(message, type) {
     const container = document.getElementById('messageContainer');

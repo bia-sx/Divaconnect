@@ -1,7 +1,6 @@
-// Configuração da API
+
 const API_URL = '/Divaconnect/entreelas/backend/api.php';
 
-// Estado global
 let currentUser = null;
 let allServices = [];
 let currentFilters = {
@@ -10,12 +9,9 @@ let currentFilters = {
     cidade: ''
 };
 
-// Aguarda DOM carregar
 document.addEventListener('DOMContentLoaded', function() {
-    // Verifica autenticação
     checkAuth();
     
-    // Event listeners
     document.getElementById('btnLogout').addEventListener('click', logout);
     document.getElementById('btnSearch').addEventListener('click', applyFilters);
     document.getElementById('searchInput').addEventListener('keypress', function(e) {
@@ -25,24 +21,19 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('filterCidade').addEventListener('change', applyFilters);
     document.getElementById('btnClearFilters').addEventListener('click', clearFilters);
     
-    // Modal
     document.getElementById('closeModal').addEventListener('click', closeModal);
     document.getElementById('btnCancelar').addEventListener('click', closeModal);
     document.getElementById('formSolicitacao').addEventListener('submit', enviarSolicitacao);
     
-    // Fecha modal ao clicar fora
     document.getElementById('modalSolicitacao').addEventListener('click', function(e) {
         if (e.target === this) closeModal();
     });
 });
 
-// ========== AUTENTICAÇÃO ==========
 
 async function checkAuth() {
-    // Verifica se tem usuário no localStorage
     const usuarioData = localStorage.getItem('usuario');
 
-    // Se não existe ou é "undefined" ou é vazio → desloga
     if (!usuarioData || usuarioData === "undefined" || usuarioData === "null") {
         localStorage.removeItem('usuario');
         localStorage.removeItem('token');
@@ -62,11 +53,9 @@ async function checkAuth() {
 
     currentUser = parsedUser;
 
-    // Atualiza interface com dados do usuário
     document.getElementById('userName').textContent = currentUser.nome.split(' ')[0];
     document.getElementById('welcomeName').textContent = currentUser.nome.split(' ')[0];
 
-    // Carrega serviços
     loadServices();
 }
 
@@ -81,16 +70,13 @@ async function logout() {
         console.error('Erro ao fazer logout:', error);
     }
     
-    // Limpa dados locais
     localStorage.removeItem('usuario');
     localStorage.removeItem('token');
     
-    // Redireciona para login
     window.location.href = 'login.html';
 }
 
-// ========== SERVIÇOS ==========
-
+-
 async function loadServices() {
     showLoading(true);
     
@@ -105,16 +91,13 @@ async function loadServices() {
             credentials: 'include'
         });
         
-        // Verifica se a resposta está OK
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        // Pega o texto da resposta primeiro
         const text = await response.text();
         console.log('Resposta da API:', text);
         
-        // Tenta fazer parse do JSON
         let data;
         try {
             data = JSON.parse(text);
@@ -194,12 +177,10 @@ function getCategoryIcon(categoria) {
         'Psicóloga': '<img src="../assets/images/psi2.png" class="icon">',
         'Encanadora': '<img src="../assets/images/encanadora2.png" class="icon">',
         'Pintora': '<img src="../assets/images/pintura2.png" class="icon">',
-        'Jardineira': '<img src="../assets/images/jardim2.png" class="icon">'
+        'Desenvolvedora': '<img src="../assets/images/computador.png" class="icon">'
     };
     return icons[categoria] || '⭐';
 }
-
-// ========== FILTROS ==========
 
 function applyFilters() {
     currentFilters.search = document.getElementById('searchInput').value.toLowerCase();
@@ -208,7 +189,6 @@ function applyFilters() {
     
     let filtered = allServices;
     
-    // Filtro de busca
     if (currentFilters.search) {
         filtered = filtered.filter(s => 
             s.titulo.toLowerCase().includes(currentFilters.search) ||
@@ -217,12 +197,10 @@ function applyFilters() {
         );
     }
     
-    // Filtro de categoria
     if (currentFilters.categoria) {
         filtered = filtered.filter(s => s.categoria === currentFilters.categoria);
     }
     
-    // Filtro de cidade
     if (currentFilters.cidade) {
         filtered = filtered.filter(s => s.localizacao === currentFilters.cidade);
     }
@@ -250,7 +228,6 @@ function populateCityFilter() {
     });
 }
 
-// ========== MODAL ==========
 
 function openModal(serviceId) {
     const service = allServices.find(s => s.id === parseInt(serviceId));
@@ -265,14 +242,11 @@ function openModal(serviceId) {
         ${service.preco_estimado ? `<p style="font-size: 20px; font-weight: 700; color: #E85D4E; margin-top: 12px;">R$ ${parseFloat(service.preco_estimado).toFixed(2)}</p>` : ''}
     `;
     
-    // Armazena ID do serviço no formulário
     document.getElementById('formSolicitacao').dataset.serviceId = serviceId;
     
-    // Limpa mensagem e campos
     document.getElementById('modalMessage').innerHTML = '';
     document.getElementById('mensagem').value = '';
-    
-    // Mostra modal
+
     document.getElementById('modalSolicitacao').classList.add('active');
 }
 
@@ -316,7 +290,6 @@ async function enviarSolicitacao(e) {
     }
 }
 
-// ========== UTILIDADES ==========
 
 function showLoading(show) {
     document.getElementById('loadingServices').style.display = show ? 'block' : 'none';

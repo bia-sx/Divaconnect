@@ -1,4 +1,4 @@
-/* Header */
+
 .header {
     background-color: #fff;
     padding: 20px 0;
@@ -109,7 +109,6 @@
     transition: all 0.3s;
 }
 
-/* Hero Section */
 .hero {
     padding: 80px 0;
     background: linear-gradient(135deg, #FFF5F3 0%, #FFE8E3 100%);
@@ -236,12 +235,21 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.1);
 }
 
+.image-placeholder img{
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+}
+
 .illustration {
     width: 100%;
     height: auto;
 }
 
-/* Como Funciona Section */
 .section-como-funciona {
     padding: 100px 0;
     background-color: #FAFAFA;
@@ -333,7 +341,6 @@
     line-height: 1.6;
 }
 
-/* Categorias Section */
 .section-categorias {
     padding: 100px 0;
     background-color: white;
@@ -392,7 +399,6 @@
     color: white;
 }
 
-/* Segurança Section */
 .section-seguranca {
     padding: 100px 0;
     background: linear-gradient(135deg, #3E2723 0%, #5D4037 100%);
@@ -499,7 +505,6 @@
     color: rgba(255,255,255,0.8);
 }
 
-/* CTA Section */
 .section-cta {
     padding: 100px 0;
     background-color: #FAFAFA;
@@ -567,7 +572,6 @@
     color: white;
 }
 
-/* Footer */
 .footer {
     background-color: #2C2C2C;
     color: white;
@@ -650,7 +654,6 @@
     color: rgba(255,255,255,0.6);
 }
 
-/* Responsividade */
 @media (max-width: 1024px) {
     .hero-container {
         grid-template-columns: 1fr;

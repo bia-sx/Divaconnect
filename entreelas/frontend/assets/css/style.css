@@ -1,4 +1,4 @@
-/* Reset e configurações globais */
+
 * {
     margin: 0;
     padding: 0;
@@ -27,7 +27,6 @@ button {
     padding: 0 20px;
 }
 
-/* Utilitários */
 .text-center {
     text-align: center;
 }
@@ -40,7 +39,6 @@ button {
     margin-bottom: 20px;
 }
 
-/* Animações */
 @keyframes fadeIn {
     from {
         opacity: 0;

@@ -1,4 +1,4 @@
-/* Login Page - Design Único */
+
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +17,6 @@ body {
     position: relative;
 }
 
-/* ========== LADO ESQUERDO - BRANDING ========== */
 .login-brand-side {
     background: linear-gradient(135deg, #E85D4E 0%, #FF6B6B 50%, #FF9E8E 100%);
     position: relative;
@@ -27,7 +26,6 @@ body {
     justify-content: center;
 }
 
-/* Formas Flutuantes Animadas */
 .floating-shapes {
     position: absolute;
     width: 100%;
@@ -87,7 +85,6 @@ body {
     }
 }
 
-/* Brand Content */
 .brand-content {
     position: relative;
     z-index: 1;
@@ -150,7 +147,6 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* Stats */
 .brand-stats {
     display: flex;
     justify-content: center;
@@ -185,7 +181,6 @@ body {
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* Feature Chips */
 .brand-features {
     display: flex;
     justify-content: center;
@@ -203,7 +198,6 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* ========== LADO DIREITO - FORMULÁRIO ========== */
 .login-form-side {
     background: #FAFAFA;
     display: flex;
@@ -257,7 +251,6 @@ body {
     color: #666;
 }
 
-/* Modern Form */
 .modern-form {
     display: flex;
     flex-direction: column;
@@ -342,7 +335,6 @@ body {
     min-height: 18px;
 }
 
-/* Form Options */
 .form-options {
     display: flex;
     justify-content: space-between;
@@ -381,7 +373,6 @@ body {
     color: #d54a3b;
 }
 
-/* Submit Button */
 .submit-button {
     width: 100%;
     padding: 16px;
@@ -462,7 +453,6 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* Form Footer */
 .form-footer {
     margin-top: 32px;
 }
@@ -520,7 +510,6 @@ body {
     transform: translateX(4px);
 }
 
-/* Security Badge */
 .security-badge {
     position: absolute;
     bottom: 12px;
@@ -545,7 +534,6 @@ body {
     font-weight: 600;
 }
 
-/* Messages */
 .alert {
     padding: 12px 16px;
     border-radius: 10px;
@@ -599,7 +587,6 @@ body {
     }
 }
 
-/* Responsividade */
 @media (max-width: 1024px) {
     .login-wrapper {
         grid-template-columns: 1fr;
@@ -710,7 +697,6 @@ body {
     background-color: #d54a3b;
 }
 
-/* Login Section */
 .login-section {
     min-height: calc(100vh - 160px);
     background: linear-gradient(135deg, #FFF5F3 0%, #FFE8E3 100%);
@@ -726,7 +712,6 @@ body {
     align-items: center;
 }
 
-/* Login Info */
 .login-info {
     display: flex;
     align-items: center;
@@ -788,7 +773,6 @@ body {
     color: #666;
 }
 
-/* Form Container */
 .login-form-container {
     display: flex;
     justify-content: center;
@@ -816,7 +800,6 @@ body {
     margin-bottom: 32px;
 }
 
-/* Form Styles */
 .form {
     display: flex;
     flex-direction: column;
@@ -861,7 +844,6 @@ body {
     min-height: 18px;
 }
 
-/* Password Wrapper */
 .password-wrapper {
     position: relative;
 }
@@ -888,7 +870,6 @@ body {
     opacity: 1;
 }
 
-/* Form Options */
 .form-options {
     display: flex;
     justify-content: space-between;
@@ -924,7 +905,6 @@ body {
     color: #d54a3b;
 }
 
-/* Submit Button */
 .btn-submit {
     padding: 16px;
     background-color: #E85D4E;
@@ -954,7 +934,6 @@ body {
     transform: none;
 }
 
-/* Loader */
 .loader {
     width: 20px;
     height: 20px;
@@ -968,7 +947,6 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* Form Footer */
 .form-footer {
     text-align: center;
     margin-top: 8px;
@@ -989,7 +967,6 @@ body {
     color: #d54a3b;
 }
 
-/* Messages */
 #messageContainer {
     margin-bottom: 16px;
 }
@@ -1025,7 +1002,6 @@ body {
     }
 }
 
-/* Footer */
 .footer {
     background-color: #2C2C2C;
     color: white;
@@ -1038,7 +1014,6 @@ body {
     color: rgba(255,255,255,0.7);
 }
 
-/* Responsividade */
 @media (max-width: 1024px) {
     .login-container {
         grid-template-columns: 1fr;

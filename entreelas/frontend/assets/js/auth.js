@@ -1,29 +1,24 @@
-// Configuração da API
+
 const API_URL = '/Divaconnect/entreelas/backend/api.php';
 
-// Aguarda o DOM carregar
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ========== LOGIN ==========
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         initLoginPage();
     }
 
-    // ========== CADASTRO ==========
     const cadastroForm = document.getElementById('cadastroForm');
     if (cadastroForm) {
         initCadastroPage();
     }
 });
 
-// ========== FUNÇÕES DO LOGIN ==========
 function initLoginPage() {
     const loginForm = document.getElementById('loginForm');
     const togglePassword = document.getElementById('togglePassword');
     const senhaInput = document.getElementById('senha');
 
-    // Toggle mostrar/ocultar senha
     if (togglePassword) {
         togglePassword.addEventListener('click', function() {
             const type = senhaInput.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -32,19 +27,15 @@ function initLoginPage() {
         });
     }
 
-    // Submit do formulário
     loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Limpa erros anteriores
         clearErrors();
         clearMessages();
 
-        // Pega os dados
         const email = document.getElementById('email').value.trim();
         const senha = document.getElementById('senha').value;
 
-        // Validações
         let hasError = false;
 
         if (!email || !validateEmail(email)) {
@@ -59,7 +50,6 @@ function initLoginPage() {
 
         if (hasError) return;
 
-        // Mostra loading
         setLoading(true);
 
         try {
@@ -77,8 +67,6 @@ function initLoginPage() {
             const data = await response.json();
 
             if (data.success) {
-                // Salva dados no localStorage
-               // Corrige estrutura: usuário está dentro de data.data.usuario
                 if (data.data && data.data.usuario) {
                     const usuario = data.data.usuario;
                     const token = data.data.token;
@@ -97,7 +85,6 @@ function initLoginPage() {
                 
                 showMessage('Login realizado com sucesso! Redirecionando...', 'success');
                 
-                // Redireciona após 1 segundo
                 setTimeout(() => {
                     window.location.href = 'dashboard.html';
                 }, 1000);
@@ -113,7 +100,6 @@ function initLoginPage() {
     });
 }
 
-// ========== FUNÇÕES DO CADASTRO ==========
 function initCadastroPage() {
     const cadastroForm = document.getElementById('cadastroForm');
     const ehPrestadoraCheckbox = document.getElementById('ehPrestadora');
@@ -124,14 +110,12 @@ function initCadastroPage() {
     const confirmarSenhaInput = document.getElementById('confirmarSenha');
     const telefoneInput = document.getElementById('telefone');
 
-    // Máscara de telefone
     if (telefoneInput) {
         telefoneInput.addEventListener('input', function(e) {
             this.value = phoneMask(this.value);
         });
     }
 
-    // Toggle campos de prestadora
     if (ehPrestadoraCheckbox && prestadoraFields) {
         ehPrestadoraCheckbox.addEventListener('change', function() {
             if (this.checked) {
@@ -146,7 +130,6 @@ function initCadastroPage() {
         });
     }
 
-    // Toggle mostrar/ocultar senha
     if (togglePassword) {
         togglePassword.addEventListener('click', function() {
             const type = senhaInput.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -163,15 +146,12 @@ function initCadastroPage() {
         });
     }
 
-    // Submit do formulário
     cadastroForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Limpa erros anteriores
         clearErrors();
         clearMessages();
 
-        // Pega os dados
         const formData = {
             nome: document.getElementById('nome').value.trim(),
             email: document.getElementById('email').value.trim(),
@@ -185,7 +165,6 @@ function initCadastroPage() {
             termos: document.getElementById('termos').checked
         };
 
-        // Validações
         let hasError = false;
 
         if (!formData.nome || formData.nome.length < 3) {
@@ -230,7 +209,6 @@ function initCadastroPage() {
 
         if (hasError) return;
 
-        // Mostra loading
         setLoading(true);
 
         try {
@@ -250,7 +228,6 @@ function initCadastroPage() {
             if (data.success) {
                 showMessage('Cadastro realizado com sucesso! Redirecionando para login...', 'success');
                 
-                // Redireciona após 2 segundos
                 setTimeout(() => {
                     window.location.href = 'login.html';
                 }, 2000);
@@ -266,9 +243,6 @@ function initCadastroPage() {
     });
 }
 
-// ========== FUNÇÕES AUXILIARES ==========
-
-// Mostra erro em campo específico
 function showFieldError(fieldId, message) {
     const errorElement = document.getElementById(fieldId);
     if (errorElement) {
@@ -277,14 +251,12 @@ function showFieldError(fieldId, message) {
     }
 }
 
-// Limpa todos os erros
 function clearErrors() {
     document.querySelectorAll('.form-error').forEach(el => {
         el.textContent = '';
     });
 }
 
-// Mostra mensagem geral
 function showMessage(message, type) {
     const messageContainer = document.getElementById('messageContainer');
     if (!messageContainer) return;
@@ -297,7 +269,6 @@ function showMessage(message, type) {
     `;
 }
 
-// Limpa mensagens
 function clearMessages() {
     const messageContainer = document.getElementById('messageContainer');
     if (messageContainer) {
@@ -305,7 +276,6 @@ function clearMessages() {
     }
 }
 
-// Controla estado de loading do botão
 function setLoading(isLoading) {
     const btnSubmit = document.getElementById('btnSubmit');
     const btnText = document.getElementById('btnText');
@@ -322,13 +292,11 @@ function setLoading(isLoading) {
     }
 }
 
-// Valida email (já definida no main.js, mas repetindo por segurança)
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
-// Máscara de telefone (já definida no main.js, mas repetindo por segurança)
 function phoneMask(value) {
     if (!value) return '';
     value = value.replace(/\D/g, '');

@@ -1,15 +1,14 @@
-// Configuração da API
+
 const API_URL = '/Divaconnect/entreelas/backend/api.php';
 
-// Estado
+
 let currentUser = null;
 let currentTab = 'enviadas';
 
-// Aguarda DOM carregar
+
 document.addEventListener('DOMContentLoaded', function() {
     checkAuth();
     
-    // Tabs
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const tab = this.dataset.tab;
@@ -17,11 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Logout
     document.getElementById('btnLogout').addEventListener('click', logout);
 });
 
-// ========== AUTENTICAÇÃO ==========
 
 function checkAuth() {
     const usuarioData = localStorage.getItem('usuario');
@@ -34,12 +31,10 @@ function checkAuth() {
     currentUser = JSON.parse(usuarioData);
     document.getElementById('userName').textContent = currentUser.nome.split(' ')[0];
     
-    // Verifica se é prestadora para mostrar aba de recebidas
     if (!currentUser.eh_prestadora || currentUser.eh_prestadora === '0') {
         document.getElementById('tabRecebidas').style.display = 'none';
     }
     
-    // Carrega solicitações
     loadSolicitacoes();
 }
 
@@ -49,28 +44,23 @@ function logout() {
     window.location.href = 'login.html';
 }
 
-// ========== TABS ==========
 
 function switchTab(tab) {
     currentTab = tab;
     
-    // Atualiza botões
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
     
-    // Atualiza conteúdo
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
     });
     document.getElementById(`tab-${tab}`).classList.add('active');
-    
-    // Carrega solicitações da aba
+
     loadSolicitacoes();
 }
 
-// ========== CARREGAR SOLICITAÇÕES ==========
 
 async function loadSolicitacoes() {
     const tipo = currentTab;
@@ -186,7 +176,6 @@ function renderActions(sol, tipo, telefone) {
     return '';
 }
 
-// ========== RESPONDER SOLICITAÇÃO ==========
 
 async function responderSolicitacao(solicitacaoId, status) {
     if (!confirm(`Tem certeza que deseja ${status === 'aceita' ? 'aceitar' : 'recusar'} esta solicitação?`)) {
@@ -223,7 +212,6 @@ function entrarEmContato(telefone) {
     window.open(`https://wa.me/55${limpo}`, '_blank');
 }
 
-// ========== UTILIDADES ==========
 
 function getStatusText(status) {
     const texts = {

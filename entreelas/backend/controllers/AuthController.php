@@ -11,12 +11,8 @@ class AuthController {
         $this->conn = $this->db->getConnection();
     }
 
-    /**
-     * Cadastra nova usuária
-     */
     public function cadastro($data) {
         try {
-            // Valida campos obrigatórios
             $requiredFields = ['nome', 'email', 'telefone', 'cidade', 'senha'];
             $missingFields = validateRequiredFields($data, $requiredFields);
             
@@ -24,19 +20,16 @@ class AuthController {
                 sendError('Campos obrigatórios faltando: ' . implode(', ', $missingFields), 400);
             }
 
-            // Sanitiza dados
             $nome = sanitizeString($data['nome']);
             $email = sanitizeString($data['email']);
             $telefone = sanitizeString($data['telefone']);
             $cidade = sanitizeString($data['cidade']);
             $senha = $data['senha'];
             
-            // Campos opcionais de prestadora
             $ehPrestadora = isset($data['ehPrestadora']) && $data['ehPrestadora'] === true ? 1 : 0;
             $areaAtuacao = isset($data['areaAtuacao']) ? sanitizeString($data['areaAtuacao']) : null;
             $descricaoProfissional = isset($data['descricaoProfissional']) ? sanitizeString($data['descricaoProfissional']) : null;
 
-            // Validações
             if (strlen($nome) < 3) {
                 sendError('Nome deve ter no mínimo 3 caracteres', 400);
             }
@@ -49,7 +42,6 @@ class AuthController {
                 sendError('Senha deve ter no mínimo 8 caracteres', 400);
             }
 
-            // Verifica se email já existe
             $query = "SELECT id FROM usuarios WHERE email = :email";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':email', $email);
@@ -59,10 +51,8 @@ class AuthController {
                 sendError('Email já cadastrado', 400);
             }
 
-            // Hash da senha
             $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
-            // Insere usuária
             $query = "INSERT INTO usuarios 
                       (nome, email, telefone, cidade, senha, eh_prestadora, area_atuacao, descricao_profissional) 
                       VALUES 
@@ -82,7 +72,6 @@ class AuthController {
             if ($stmt->execute()) {
                 $usuarioId = $this->conn->lastInsertId();
                 
-                // Se é prestadora E tem área de atuação, cria um serviço inicial automaticamente
                 if ($ehPrestadora && $areaAtuacao) {
                     $tituloServico = "Serviço de " . $areaAtuacao;
                     $descricaoServico = $descricaoProfissional ?: "Profissional de " . $areaAtuacao . " oferecendo serviços de qualidade.";
@@ -112,12 +101,8 @@ class AuthController {
         }
     }
 
-    /**
-     * Realiza login
-     */
     public function login($data) {
         try {
-            // Valida campos obrigatórios
             $requiredFields = ['email', 'senha'];
             $missingFields = validateRequiredFields($data, $requiredFields);
             
@@ -128,12 +113,10 @@ class AuthController {
             $email = sanitizeString($data['email']);
             $senha = $data['senha'];
 
-            // Valida email
             if (!validateEmail($email)) {
                 sendError('Email inválido', 400);
             }
 
-            // Busca usuária
             $query = "SELECT id, nome, email, telefone, cidade, senha, foto_perfil, 
                              eh_prestadora, area_atuacao, descricao_profissional 
                       FROM usuarios 
@@ -149,15 +132,12 @@ class AuthController {
 
             $usuario = $stmt->fetch();
 
-            // Verifica senha
             if (!password_verify($senha, $usuario['senha'])) {
                 sendError('Email ou senha incorretos', 401);
             }
 
-            // Remove senha do retorno
             unset($usuario['senha']);
 
-            // Inicia sessão
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
@@ -178,9 +158,6 @@ class AuthController {
         }
     }
 
-    /**
-     * Realiza logout
-     */
     public function logout() {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -192,9 +169,6 @@ class AuthController {
         sendSuccess([], 'Logout realizado com sucesso!');
     }
 
-    /**
-     * Verifica se está autenticado
-     */
     public function verificarAutenticacao() {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -204,7 +178,6 @@ class AuthController {
             sendError('Não autenticado', 401);
         }
 
-        // Verifica timeout de sessão (30 minutos)
         if (isset($_SESSION['ultimo_acesso']) && (time() - $_SESSION['ultimo_acesso']) > 1800) {
             session_unset();
             session_destroy();

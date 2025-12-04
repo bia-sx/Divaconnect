@@ -1,4 +1,4 @@
-/* Solicitações Page */
+
 .solicitacoes-section {
     padding: 60px 0;
     background-color: #FAFAFA;
@@ -12,7 +12,6 @@
     margin-bottom: 40px;
 }
 
-/* Tabs */
 .tabs {
     display: flex;
     gap: 12px;
@@ -51,7 +50,6 @@
     display: block;
 }
 
-/* Lista de Solicitações */
 .solicitacoes-list {
     display: flex;
     flex-direction: column;

@@ -1,7 +1,6 @@
-// Aguarda o DOM carregar completamente
+
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Menu mobile toggle
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const nav = document.getElementById('nav');
     
@@ -12,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Smooth scroll para links internos
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -24,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     block: 'start'
                 });
                 
-                // Fecha menu mobile após clicar
                 if (nav && nav.classList.contains('active')) {
                     nav.classList.remove('active');
                     mobileMenuToggle.classList.remove('active');
@@ -33,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Adiciona animações quando elementos entram na viewport
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -48,12 +44,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    // Observa elementos que devem ter animação
     document.querySelectorAll('.step, .categoria-card, .stat-card').forEach(el => {
         observer.observe(el);
     });
     
-    // Header transparente ao rolar
     const header = document.querySelector('.header');
     
     if (header) {
@@ -71,18 +65,15 @@ document.addEventListener('DOMContentLoaded', function() {
             lastScroll = currentScroll;
         });
     }
-    
-    // Formulários - Prevenir envio padrão
+
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            // A lógica de envio será implementada em cada página específica
         });
     });
 });
 
-// Função auxiliar para mostrar mensagens de feedback
 function showMessage(message, type = 'success') {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message message-${type}`;
@@ -110,19 +101,16 @@ function showMessage(message, type = 'success') {
     }, 3000);
 }
 
-// Função para validar email
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
-// Função para validar telefone
 function validatePhone(phone) {
     const re = /^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/;
     return re.test(phone.replace(/\D/g, ''));
 }
 
-// Máscara para telefone
 function phoneMask(value) {
     if (!value) return '';
     value = value.replace(/\D/g, '');

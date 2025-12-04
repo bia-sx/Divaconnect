@@ -1,4 +1,4 @@
-/* Meus Serviços */
+
 .meus-servicos-section {
     padding: 60px 0;
     background-color: #FAFAFA;
@@ -35,7 +35,6 @@
     transform: translateY(-2px);
 }
 
-/* Grid de Serviços */
 .servicos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -206,7 +205,6 @@
     min-height: 120px;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     .page-header {
         flex-direction: column;

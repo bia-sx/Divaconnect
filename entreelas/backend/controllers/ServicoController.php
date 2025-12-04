@@ -11,12 +11,8 @@ class ServicoController {
         $this->conn = $this->db->getConnection();
     }
 
-    /**
-     * Lista todos os serviços ativos (exceto os da própria usuária se estiver logada)
-     */
     public function listarServicos() {
         try {
-            // Verifica se há usuária logada
             $usuarioId = null;
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
@@ -40,7 +36,6 @@ class ServicoController {
                       INNER JOIN usuarios u ON s.usuario_id = u.id
                       WHERE s.ativo = 1";
             
-            // Se estiver logada, exclui seus próprios serviços
             if ($usuarioId) {
                 $query .= " AND s.usuario_id != :usuario_id";
             }
@@ -65,12 +60,8 @@ class ServicoController {
         }
     }
 
-    /**
-     * Lista serviços da própria usuária
-     */
     public function meusServicos() {
         try {
-            // Verifica autenticação
             $authController = new AuthController();
             $usuarioId = $authController->verificarAutenticacao();
 
@@ -102,16 +93,11 @@ class ServicoController {
         }
     }
 
-    /**
-     * Cria novo serviço
-     */
     public function criarServico($data) {
         try {
-            // Verifica autenticação
             $authController = new AuthController();
             $usuarioId = $authController->verificarAutenticacao();
 
-            // Valida campos obrigatórios
             $requiredFields = ['titulo', 'descricao', 'categoria', 'localizacao'];
             $missingFields = validateRequiredFields($data, $requiredFields);
             
@@ -125,7 +111,6 @@ class ServicoController {
             $localizacao = sanitizeString($data['localizacao']);
             $precoEstimado = isset($data['preco_estimado']) ? floatval($data['preco_estimado']) : null;
 
-            // Validações
             if (strlen($titulo) < 5) {
                 sendError('Título deve ter no mínimo 5 caracteres', 400);
             }
@@ -134,7 +119,6 @@ class ServicoController {
                 sendError('Descrição deve ter no mínimo 20 caracteres', 400);
             }
 
-            // Insere serviço
             $query = "INSERT INTO servicos (usuario_id, titulo, descricao, categoria, preco_estimado, localizacao) 
                       VALUES (:usuario_id, :titulo, :descricao, :categoria, :preco_estimado, :localizacao)";
             
@@ -160,9 +144,6 @@ class ServicoController {
         }
     }
 
-    /**
-     * Atualiza serviço
-     */
     public function atualizarServico($data) {
         try {
             $authController = new AuthController();
@@ -174,7 +155,6 @@ class ServicoController {
 
             $servicoId = intval($data['servico_id']);
 
-            // Verifica se o serviço pertence à usuária
             $query = "SELECT id FROM servicos WHERE id = :servico_id AND usuario_id = :usuario_id";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':servico_id', $servicoId, PDO::PARAM_INT);
@@ -243,9 +223,6 @@ class ServicoController {
         }
     }
 
-    /**
-     * Deleta serviço
-     */
     public function deletarServico($data) {
         try {
             $authController = new AuthController();
@@ -257,7 +234,6 @@ class ServicoController {
 
             $servicoId = intval($data['servico_id']);
 
-            // Verifica se o serviço pertence à usuária
             $query = "SELECT id FROM servicos WHERE id = :servico_id AND usuario_id = :usuario_id";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':servico_id', $servicoId, PDO::PARAM_INT);
@@ -268,7 +244,6 @@ class ServicoController {
                 sendError('Serviço não encontrado', 404);
             }
 
-            // Deleta serviço (CASCADE vai deletar solicitações relacionadas)
             $query = "DELETE FROM servicos WHERE id = :servico_id";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':servico_id', $servicoId, PDO::PARAM_INT);

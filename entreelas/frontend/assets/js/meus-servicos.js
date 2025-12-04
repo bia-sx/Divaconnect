@@ -1,28 +1,23 @@
-// Configuração da API
+
 const API_URL = '/Divaconnect/entreelas/backend/api.php';
 
-// Estado
 let currentUser = null;
 let editandoServicoId = null;
 
-// Aguarda DOM carregar
 document.addEventListener('DOMContentLoaded', function() {
     checkAuth();
     
-    // Event listeners
     document.getElementById('btnLogout').addEventListener('click', logout);
     document.getElementById('btnAddServico').addEventListener('click', () => openModal());
     document.getElementById('closeModal').addEventListener('click', closeModal);
     document.getElementById('btnCancelar').addEventListener('click', closeModal);
     document.getElementById('formServico').addEventListener('submit', salvarServico);
     
-    // Fecha modal ao clicar fora
     document.getElementById('modalServico').addEventListener('click', function(e) {
         if (e.target === this) closeModal();
     });
 });
 
-// ========== AUTENTICAÇÃO ==========
 
 function checkAuth() {
     const usuarioData = localStorage.getItem('usuario');
@@ -34,8 +29,7 @@ function checkAuth() {
     
     currentUser = JSON.parse(usuarioData);
     document.getElementById('userName').textContent = currentUser.nome.split(' ')[0];
-    
-    // Verifica se é prestadora
+
     if (!currentUser.eh_prestadora || currentUser.eh_prestadora === '0') {
         alert('Apenas prestadoras podem acessar esta página');
         window.location.href = 'dashboard.html';
@@ -50,8 +44,6 @@ function logout() {
     localStorage.removeItem('token');
     window.location.href = 'login.html';
 }
-
-// ========== CARREGAR SERVIÇOS ==========
 
 async function loadServicos() {
     showLoading(true);
@@ -131,12 +123,11 @@ function getCategoryIcon(categoria) {
         'Eletricista': '<img src="../assets/images/luz.png" class="icon">', 'Babá': '<img src="../assets/images/bebe2.png" class="icon">', 'Diarista': '<img src="../assets/images/vassoura.png" class="icon">',
         'Cozinheira': '<img src="../assets/images/chefe3.png" class="icon">', 'Cuidadora de Idosos': '<img src="../assets/images/idoso3.png" class="icon">', 'Manicure': '<img src="../assets/images/manicure2.png" class="icon">',
         'Costureira': '<img src="../assets/images/manicure2.png" class="icon">', 'Personal Trainer': '<img src="../assets/images/personal4.png" class="icon">', 'Psicóloga': '<img src="../assets/images/psi2.png" class="icon">',
-        'Encanadora': '<img src="../assets/images/encanadora2.png" class="icon">', 'Pintora': '<img src="../assets/images/pintura2.png" class="icon">', 'Jardineira': '<img src="../assets/images/jardim2.png" class="icon">'
+        'Encanadora': '<img src="../assets/images/encanadora2.png" class="icon">', 'Pintora': '<img src="../assets/images/pintura2.png" class="icon">', 'Desenvolvedora': '<img src="../assets/images/computador.png" class="icon">'
     };
     return icons[categoria] || '⭐';
 }
 
-// ========== MODAL ==========
 
 function openModal(servico = null) {
     editandoServicoId = servico ? servico.id : null;
@@ -189,7 +180,6 @@ async function editarServico(id) {
     }
 }
 
-// ========== SALVAR SERVIÇO ==========
 
 async function salvarServico(e) {
     e.preventDefault();
@@ -203,7 +193,6 @@ async function salvarServico(e) {
         localizacao: document.getElementById('localizacao').value.trim()
     };
     
-    // Validações
     let hasError = false;
     
     if (formData.titulo.length < 5) {
@@ -264,7 +253,6 @@ async function salvarServico(e) {
     }
 }
 
-// ========== TOGGLE E EXCLUIR ==========
 
 async function toggleServico(id, ativo) {
     const novoStatus = ativo == 1 ? 0 : 1;
@@ -320,7 +308,6 @@ async function excluirServico(id) {
     }
 }
 
-// ========== UTILIDADES ==========
 
 function showLoading(show) {
     document.getElementById('loadingServicos').style.display = show ? 'block' : 'none';
