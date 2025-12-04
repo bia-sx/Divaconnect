@@ -183,18 +183,18 @@ function displayServices(services) {
 
 function getCategoryIcon(categoria) {
     const icons = {
-        'Eletricista': '💡',
-        'Babá': '👶',
-        'Diarista': '🧹',
-        'Cozinheira': '👩‍🍳',
-        'Cuidadora de Idosos': '💅',
-        'Manicure': '💅',
-        'Costureira': '🧵',
-        'Personal Trainer': '💪',
-        'Psicóloga': '🧠',
-        'Encanadora': '🔧',
-        'Pintora': '🎨',
-        'Jardineira': '🌱'
+        'Eletricista': '<img src="../assets/images/luz.png" class="icon">',
+        'Babá': '<img src="../assets/images/bebe2.png" class="icon">',
+        'Diarista': '<img src="../assets/images/vassoura.png" class="icon">',
+        'Cozinheira': '<img src="../assets/images/chefe3.png" class="icon">',
+        'Cuidadora de Idosos': '<img src="../assets/images/idoso3.png" class="icon">',
+        'Manicure': '<img src="../assets/images/manicure2.png" class="icon">',
+        'Costureira': '<img src="../assets/images/manicure2.png" class="icon">',
+        'Personal Trainer': '<img src="../assets/images/personal4.png" class="icon">',
+        'Psicóloga': '<img src="../assets/images/psi2.png" class="icon">',
+        'Encanadora': '<img src="../assets/images/encanadora2.png" class="icon">',
+        'Pintora': '<img src="../assets/images/pintura2.png" class="icon">',
+        'Jardineira': '<img src="../assets/images/jardim2.png" class="icon">'
     };
     return icons[categoria] || '⭐';
 }

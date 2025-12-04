@@ -8,11 +8,9 @@
     <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
 <body>
-    <!-- Header -->
     <header class="header-dashboard">
         <div class="container">
             <a href="dashboard.html" class="logo">
-                <div class="logo-icon">❤️</div>
                 <h1 class="logo-text">Diva<span class="logo-highlight">Connect</span></h1>
             </a>
             
@@ -25,7 +23,7 @@
 
             <div class="header-actions">
                 <div class="user-info" id="userInfo">
-                    <span class="user-avatar">👤</span>
+                    <span class="user-avatar"><img src="../assets/images/profile3.png" alt=""></span>
                     <span class="user-name" id="userName">Carregando...</span>
                 </div>
                 <button class="btn-logout" id="btnLogout">Sair</button>
@@ -33,10 +31,9 @@
         </div>
     </header>
 
-    <!-- Hero Dashboard -->
     <section class="hero-dashboard">
         <div class="container">
-            <h2 class="hero-title">Olá, <span id="welcomeName">bem-vinda</span>! 👋</h2>
+            <h2 class="hero-title">Olá, <span id="welcomeName">bem-vinda</span>!</h2>
             <p class="hero-subtitle">Encontre profissionais qualificadas ou gerencie seus serviços</p>
             
             <div class="search-box">
@@ -80,7 +77,6 @@
         </div>
     </section>
 
-    <!-- Serviços Disponíveis -->
     <section class="services-section">
         <div class="container">
             <h3 class="section-title">Serviços Disponíveis</h3>
@@ -90,19 +86,17 @@
                 <p>Carregando serviços...</p>
             </div>
 
-            <div id="emptyState" class="empty-state" style="display: none;">
+            <div id="emptyState" class="empty-state" style="display: none;">    
                 <span class="empty-icon">🔍</span>
                 <h4>Nenhum serviço encontrado</h4>
                 <p>Tente ajustar os filtros ou buscar por outros termos</p>
             </div>
 
             <div id="servicesGrid" class="services-grid">
-                <!-- Serviços serão inseridos aqui via JavaScript -->
             </div>
         </div>
     </section>
 
-    <!-- Modal de Solicitação -->
     <div id="modalSolicitacao" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -112,7 +106,6 @@
             
             <div class="modal-body">
                 <div class="service-info" id="modalServiceInfo">
-                    <!-- Info do serviço será inserida aqui -->
                 </div>
 
                 <form id="formSolicitacao">

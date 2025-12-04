@@ -8,139 +8,141 @@
     <link rel="stylesheet" href="../assets/css/login.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <a href="../index.html" class="logo">
-                <h1 class="logo-text">Diva<span class="logo-highlight">Connect</span></h1>
+    <div class="login-wrapper">
+        <div class="login-brand-side">
+            <div class="brand-content">
+                
+                <div class="brand-logo">
+                    <div class="logo-circle">
+                        <svg viewBox="0 0 100 100" class="heart-svg">
+                            <path d="M50 85 L20 55 Q15 45 20 35 Q25 25 35 25 Q45 25 50 35 Q55 25 65 25 Q75 25 80 35 Q85 45 80 55 Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <h1 class="brand-title">
+                        Entre<span class="brand-highlight">Elas</span>
+                    </h1>
+                </div>
+
+                <div class="brand-tagline">
+                    <p>Conectando mulheres através de serviços com segurança e confiança</p>
+                </div>
+
+                <div class="brand-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">2.500+</span>
+                        <span class="stat-label">Usuárias</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Satisfação</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">10k+</span>
+                        <span class="stat-label">Conexões</span>
+                    </div>
+                </div>
+
+                <div class="brand-features">
+                    <div class="feature-chip">100% Seguro</div>
+                    <div class="feature-chip">Só Mulheres</div>
+                    <div class="feature-chip">Rápido</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-form-side">
+            <a href="../index.html" class="back-link">
+                ← Voltar para início
             </a>
-            
-            <nav class="nav">
-                <a href="../index.html" class="nav-link">Início</a>
-                <a href="../index.html#como-funciona" class="nav-link">Como Funciona</a>
-                <a href="../index.html#servicos" class="nav-link">Serviços</a>
-            </nav>
 
-            <div class="header-buttons">
-                <a href="cadastro.html" class="btn-cadastrar">Criar Conta</a>
-            </div>
-        </div>
-    </header>
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2 class="form-title">Bem-vinda de volta!</h2>
+                </div>
 
-    <!-- Login Section -->
-    <section class="login-section">
-        <div class="container">
-            <div class="login-container">
-                <!-- Lado Esquerdo - Informações -->
-                <div class="login-info">
-                    <div class="info-content">
-                        <h2 class="info-title">Bem-vinda de volta! 💜</h2>
-                        <p class="info-description">
-                            Entre na sua conta e continue conectada com a maior 
-                            comunidade de mulheres profissionais do Brasil.
-                        </p>
-                        
-                        <div class="info-features">
-                            <div class="feature-item">
-                                <span class="feature-icon">✨</span>
-                                <div>
-                                    <h4>Acesso Rápido</h4>
-                                    <p>Encontre profissionais em segundos</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <span class="feature-icon">🛡️</span>
-                                <div>
-                                    <h4>100% Seguro</h4>
-                                    <p>Seus dados protegidos sempre</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <span class="feature-icon">💬</span>
-                                <div>
-                                    <h4>Suporte Dedicado</h4>
-                                    <p>Estamos aqui para ajudar você</p>
-                                </div>
-                            </div>
+                <form id="loginForm" class="modern-form">
+                    <div id="messageContainer"></div>
+
+                    <div class="input-group">
+                        <label for="email" class="input-label">
+                            <span class="label-text">Email</span>
+                            <span class="label-required">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">📧</span>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="modern-input" 
+                                placeholder="seu@email.com"
+                                required
+                                autocomplete="email"
+                            >
                         </div>
+                        <span class="input-error" id="emailError"></span>
                     </div>
-                </div>
 
-                <!-- Lado Direito - Formulário -->
-                <div class="login-form-container">
-                    <div class="form-card">
-                        <h1 class="form-title">Entrar na sua conta</h1>
-                        <p class="form-subtitle">Digite seus dados para acessar</p>
-
-                        <form id="loginForm" class="form">
-                            <div id="messageContainer"></div>
-
-                            <div class="form-group">
-                                <label for="email" class="form-label">Email</label>
-                                <input 
-                                    type="email" 
-                                    id="email" 
-                                    name="email" 
-                                    class="form-input" 
-                                    placeholder="seu@email.com"
-                                    required
-                                    aria-required="true"
-                                >
-                                <span class="form-error" id="emailError"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="senha" class="form-label">Senha</label>
-                                <div class="password-wrapper">
-                                    <input 
-                                        type="password" 
-                                        id="senha" 
-                                        name="senha" 
-                                        class="form-input" 
-                                        placeholder="Digite sua senha"
-                                        required
-                                        aria-required="true"
-                                        minlength="8"
-                                    >
-                                    <button type="button" class="toggle-password" id="togglePassword">
-                                        👁️
-                                    </button>
-                                </div>
-                                <span class="form-error" id="senhaError"></span>
-                            </div>
-
-                            <div class="form-options">
-                                <label class="checkbox-container">
-                                    <input type="checkbox" id="lembrar" name="lembrar">
-                                    <span class="checkmark"></span>
-                                    Lembrar de mim
-                                </label>
-                                <a href="#" class="forgot-password">Esqueceu a senha?</a>
-                            </div>
-
-                            <button type="submit" class="btn-submit" id="btnSubmit">
-                                <span id="btnText">Entrar</span>
-                                <span id="btnLoader" class="loader" style="display: none;"></span>
+                    <div class="input-group">
+                        <label for="senha" class="input-label">
+                            <span class="label-text">Senha</span>
+                            <span class="label-required">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">🔒</span>
+                            <input 
+                                type="password" 
+                                id="senha" 
+                                name="senha" 
+                                class="modern-input" 
+                                placeholder="••••••••"
+                                required
+                                autocomplete="current-password"
+                            >
+                            <button type="button" class="toggle-visibility" id="togglePassword">
+                                <span class="eye-icon">👁️</span>
                             </button>
-
-                            <div class="form-footer">
-                                <p>Ainda não tem uma conta? 
-                                    <a href="cadastro.html" class="link-primary">Cadastre-se grátis</a>
-                                </p>
-                            </div>
-                        </form>
+                        </div>
+                        <span class="input-error" id="senhaError"></span>
                     </div>
+
+                    <div class="form-options">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="lembrar">
+                            <span class="checkbox-mark"></span>
+                            <span class="checkbox-label">Manter conectada</span>
+                        </label>
+                        <a href="#" class="link-secondary">Esqueceu a senha?</a>
+                    </div>
+
+                    <button type="submit" class="submit-button" id="btnSubmit">
+                        <span class="button-content" id="btnText">
+                            <span class="button-icon">→</span>
+                            <span>Entrar</span>
+                        </span>
+                        <span class="button-loader" id="btnLoader"></span>
+                    </button>
+                </form>
+
+                <div class="form-footer">
+                    <div class="divider">
+                        <span class="divider-text">Ainda não tem conta?</span>
+                    </div>
+                    <a href="cadastro.html" class="link-create-account">
+                        Criar conta gratuita
+                        <span class="link-arrow">→</span>
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p class="footer-text">© 2025 EntreElas. Feito com ❤️ de mulheres para mulheres.</p>
+            <div class="security-badge">
+                <span class="badge-icon">🔐</span>
+                <span class="badge-text">Suas informações estão protegidas</span>
+            </div>
         </div>
-    </footer>
+    </div>
 
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/auth.js"></script>
