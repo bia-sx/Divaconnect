@@ -1,0 +1,361 @@
+/* Perfil Page */
+.perfil-section {
+    padding: 60px 0;
+    background-color: #FAFAFA;
+    min-height: calc(100vh - 80px);
+}
+
+.page-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 40px;
+}
+
+.perfil-container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 32px;
+}
+
+/* Card de Foto */
+.perfil-foto-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.foto-preview {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #E85D4E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F8F9FA;
+}
+
+.foto-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.foto-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #E85D4E 0%, #FF9E8E 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    font-weight: 700;
+    color: white;
+}
+
+.btn-upload {
+    width: 100%;
+    padding: 12px;
+    background-color: #E85D4E;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-upload:hover {
+    background-color: #d54a3b;
+}
+
+.btn-remove-foto {
+    width: 100%;
+    padding: 10px;
+    background-color: #DC3545;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-remove-foto:hover {
+    background-color: #C82333;
+}
+
+.prestadora-badge {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.badge-icon {
+    font-size: 20px;
+}
+
+/* Card do Formulário */
+.perfil-form-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.section-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #E5E5E5;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #E5E5E5;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #E85D4E;
+    box-shadow: 0 0 0 4px rgba(232, 93, 78, 0.1);
+}
+
+.form-input:disabled {
+    background-color: #F8F9FA;
+    cursor: not-allowed;
+}
+
+.form-hint {
+    display: block;
+    font-size: 12px;
+    color: #999;
+    margin-top: 4px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.form-error {
+    font-size: 13px;
+    color: #DC3545;
+    display: block;
+    min-height: 18px;
+    margin-top: 4px;
+}
+
+.btn-save-perfil {
+    width: 100%;
+    padding: 16px;
+    background-color: #E85D4E;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-save-perfil:hover {
+    background-color: #d54a3b;
+    transform: translateY(-2px);
+}
+
+.btn-save-perfil:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Seção de Senha */
+.senha-section {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 2px solid #E5E5E5;
+}
+
+.btn-change-password {
+    width: 100%;
+    padding: 14px;
+    background-color: #2196F3;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-change-password:hover {
+    background-color: #1976D2;
+}
+
+/* Zona de Perigo */
+.danger-zone {
+    margin-top: 48px;
+    padding: 24px;
+    background-color: #FFEBEE;
+    border: 2px solid #FFCDD2;
+    border-radius: 12px;
+}
+
+.danger-title {
+    color: #C62828;
+    border-bottom-color: #FFCDD2;
+}
+
+.danger-description {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.btn-delete-account {
+    width: 100%;
+    padding: 14px;
+    background-color: #DC3545;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-delete-account:hover {
+    background-color: #C82333;
+}
+
+/* Messages */
+#messageContainer,
+#senhaMessage {
+    margin: 16px 0;
+}
+
+.alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.alert-success {
+    background-color: #D4EDDA;
+    color: #155724;
+    border: 1px solid #C3E6CB;
+}
+
+.alert-error {
+    background-color: #F8D7DA;
+    color: #721C24;
+    border: 1px solid #F5C6CB;
+}
+
+/* Loader */
+.loader {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .perfil-container {
+        grid-template-columns: 1fr;
+    }
+
+    .perfil-foto-card {
+        position: relative;
+        top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 28px;
+    }
+
+    .perfil-form-card {
+        padding: 24px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .foto-preview {
+        width: 150px;
+        height: 150px;
+    }
+
+    .foto-placeholder {
+        font-size: 48px;
+    }
+}

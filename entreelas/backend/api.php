@@ -40,6 +40,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Imports
 require_once __DIR__ . '/controllers/AuthController.php';
+require_once __DIR__ . '/controllers/UsuariaController.php';
 require_once __DIR__ . '/controllers/ServicoController.php';
 require_once __DIR__ . '/controllers/SolicitacaoController.php';
 require_once __DIR__ . '/utils/response.php';
@@ -93,6 +94,55 @@ try {
             $authController = new AuthController();
             $usuarioId = $authController->verificarAutenticacao();
             sendSuccess(['usuario_id' => $usuarioId], 'Autenticado');
+            break;
+
+        // ========== PERFIL ==========
+        case 'meu-perfil':
+            if ($method !== 'GET') {
+                sendError('Método não permitido', 405);
+            }
+            $usuariaController = new UsuariaController();
+            $usuariaController->meuPerfil();
+            break;
+
+        case 'atualizar-perfil':
+            if ($method !== 'POST') {
+                sendError('Método não permitido', 405);
+            }
+            $usuariaController = new UsuariaController();
+            $usuariaController->atualizarPerfil($data);
+            break;
+
+        case 'upload-foto':
+            if ($method !== 'POST') {
+                sendError('Método não permitido', 405);
+            }
+            $usuariaController = new UsuariaController();
+            $usuariaController->uploadFoto();
+            break;
+
+        case 'remover-foto':
+            if ($method !== 'POST') {
+                sendError('Método não permitido', 405);
+            }
+            $usuariaController = new UsuariaController();
+            $usuariaController->removerFoto();
+            break;
+
+        case 'alterar-senha':
+            if ($method !== 'POST') {
+                sendError('Método não permitido', 405);
+            }
+            $usuariaController = new UsuariaController();
+            $usuariaController->alterarSenha($data);
+            break;
+
+        case 'excluir-conta':
+            if ($method !== 'POST') {
+                sendError('Método não permitido', 405);
+            }
+            $usuariaController = new UsuariaController();
+            $usuariaController->excluirConta();
             break;
 
         // ========== SERVIÇOS ==========

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - EntreElas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/perfil.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-dashboard">
+        <div class="container">
+            <a href="dashboard.html" class="logo">
+                <div class="logo-icon">❤️</div>
+                <h1 class="logo-text">Entre<span class="logo-highlight">Elas</span></h1>
+            </a>
+            
+            <nav class="nav-dashboard">
+                <a href="dashboard.html" class="nav-link">🏠 Início</a>
+                <a href="meus-servicos.html" class="nav-link">💼 Meus Serviços</a>
+                <a href="solicitacoes.html" class="nav-link">📋 Solicitações</a>
+                <a href="perfil.html" class="nav-link active">👤 Perfil</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="user-info">
+                    <span class="user-avatar">👤</span>
+                    <span class="user-name" id="userName">Carregando...</span>
+                </div>
+                <button class="btn-logout" id="btnLogout">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="perfil-section">
+        <div class="container">
+            <h2 class="page-title">Meu Perfil</h2>
+
+            <div class="perfil-container">
+                <!-- Card de Foto -->
+                <div class="perfil-foto-card">
+                    <div class="foto-preview">
+                        <img id="fotoPerfil" src="" alt="Foto de Perfil" style="display: none;">
+                        <div id="fotoPlaceholder" class="foto-placeholder">
+                            <span id="iniciais">?</span>
+                        </div>
+                    </div>
+                    
+                    <input type="file" id="inputFoto" accept="image/*" style="display: none;">
+                    
+                    <button class="btn-upload" id="btnUploadFoto">
+                        📷 Alterar Foto
+                    </button>
+                    
+                    <button class="btn-remove-foto" id="btnRemoverFoto" style="display: none;">
+                        🗑️ Remover Foto
+                    </button>
+
+                    <div class="prestadora-badge" id="prestadoraBadge" style="display: none;">
+                        <span class="badge-icon">⭐</span>
+                        <span>Prestadora de Serviços</span>
+                    </div>
+                </div>
+
+                <!-- Formulário de Dados -->
+                <div class="perfil-form-card">
+                    <form id="formPerfil">
+                        <h3 class="section-subtitle">Informações Pessoais</h3>
+
+                        <div class="form-group">
+                            <label for="nome">Nome Completo *</label>
+                            <input 
+                                type="text" 
+                                id="nome" 
+                                name="nome" 
+                                class="form-input"
+                                required
+                                minlength="3"
+                            >
+                            <span class="form-error" id="nomeError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input"
+                                required
+                                disabled
+                                title="Email não pode ser alterado"
+                            >
+                            <small class="form-hint">Email não pode ser alterado</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="telefone">Telefone *</label>
+                                <input 
+                                    type="tel" 
+                                    id="telefone" 
+                                    name="telefone" 
+                                    class="form-input"
+                                    placeholder="(00) 00000-0000"
+                                    required
+                                    maxlength="15"
+                                >
+                                <span class="form-error" id="telefoneError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cidade">Cidade *</label>
+                                <input 
+                                    type="text" 
+                                    id="cidade" 
+                                    name="cidade" 
+                                    class="form-input"
+                                    required
+                                >
+                                <span class="form-error" id="cidadeError"></span>
+                            </div>
+                        </div>
+
+                        <!-- Seção Prestadora -->
+                        <div id="secaoPrestadora" style="display: none;">
+                            <h3 class="section-subtitle">Informações Profissionais</h3>
+
+                            <div class="form-group">
+                                <label for="areaAtuacao">Área de Atuação Principal</label>
+                                <select id="areaAtuacao" name="areaAtuacao" class="form-input">
+                                    <option value="">Selecione uma área</option>
+                                    <option value="Eletricista">Eletricista</option>
+                                    <option value="Babá">Babá</option>
+                                    <option value="Diarista">Diarista</option>
+                                    <option value="Cozinheira">Cozinheira</option>
+                                    <option value="Cuidadora de Idosos">Cuidadora de Idosos</option>
+                                    <option value="Manicure">Manicure</option>
+                                    <option value="Costureira">Costureira</option>
+                                    <option value="Personal Trainer">Personal Trainer</option>
+                                    <option value="Psicóloga">Psicóloga</option>
+                                    <option value="Encanadora">Encanadora</option>
+                                    <option value="Pintora">Pintora</option>
+                                    <option value="Jardineira">Jardineira</option>
+                                    <option value="Outra">Outra</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descricaoProfissional">Descrição Profissional</label>
+                                <textarea 
+                                    id="descricaoProfissional" 
+                                    name="descricaoProfissional" 
+                                    class="form-input form-textarea"
+                                    rows="4"
+                                    placeholder="Conte sobre sua experiência e qualificações..."
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <div id="messageContainer"></div>
+
+                        <button type="submit" class="btn-save-perfil" id="btnSalvar">
+                            <span id="btnText">💾 Salvar Alterações</span>
+                            <span id="btnLoader" class="loader" style="display: none;"></span>
+                        </button>
+                    </form>
+
+                    <!-- Seção de Senha -->
+                    <div class="senha-section">
+                        <h3 class="section-subtitle">Alterar Senha</h3>
+                        
+                        <form id="formSenha">
+                            <div class="form-group">
+                                <label for="senhaAtual">Senha Atual *</label>
+                                <input 
+                                    type="password" 
+                                    id="senhaAtual" 
+                                    name="senhaAtual" 
+                                    class="form-input"
+                                    minlength="8"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="senhaNova">Nova Senha *</label>
+                                <input 
+                                    type="password" 
+                                    id="senhaNova" 
+                                    name="senhaNova" 
+                                    class="form-input"
+                                    minlength="8"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="senhaConfirmar">Confirmar Nova Senha *</label>
+                                <input 
+                                    type="password" 
+                                    id="senhaConfirmar" 
+                                    name="senhaConfirmar" 
+                                    class="form-input"
+                                    minlength="8"
+                                >
+                            </div>
+
+                            <div id="senhaMessage"></div>
+
+                            <button type="submit" class="btn-change-password" id="btnSenha">
+                                <span id="btnSenhaText">🔒 Alterar Senha</span>
+                                <span id="btnSenhaLoader" class="loader" style="display: none;"></span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Zona de Perigo -->
+                    <div class="danger-zone">
+                        <h3 class="section-subtitle danger-title">Zona de Perigo</h3>
+                        <p class="danger-description">
+                            A exclusão da conta é permanente e não pode ser desfeita. 
+                            Todos os seus dados, serviços e solicitações serão removidos.
+                        </p>
+                        <button class="btn-delete-account" id="btnExcluirConta">
+                            🗑️ Excluir Conta Permanentemente
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../assets/js/perfil.js"></script>
+</body>
+</html>

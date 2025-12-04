@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Serviços - EntreElas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/meus-servicos.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-dashboard">
+        <div class="container">
+            <a href="dashboard.html" class="logo">
+                <div class="logo-icon">❤️</div>
+                <h1 class="logo-text">Entre<span class="logo-highlight">Elas</span></h1>
+            </a>
+            
+            <nav class="nav-dashboard">
+                <a href="dashboard.html" class="nav-link">🏠 Início</a>
+                <a href="meus-servicos.html" class="nav-link active">💼 Meus Serviços</a>
+                <a href="solicitacoes.html" class="nav-link">📋 Solicitações</a>
+                <a href="perfil.html" class="nav-link">👤 Perfil</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="user-info">
+                    <span class="user-avatar">👤</span>
+                    <span class="user-name" id="userName">Carregando...</span>
+                </div>
+                <button class="btn-logout" id="btnLogout">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="meus-servicos-section">
+        <div class="container">
+            <div class="page-header">
+                <h2 class="page-title">Meus Serviços</h2>
+                <button class="btn-add-servico" id="btnAddServico">
+                    ➕ Adicionar Serviço
+                </button>
+            </div>
+
+            <div id="loadingServicos" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Carregando serviços...</p>
+            </div>
+
+            <div id="emptyServicos" class="empty-state" style="display: none;">
+                <span class="empty-icon">📦</span>
+                <h4>Você ainda não tem serviços cadastrados</h4>
+                <p>Adicione seu primeiro serviço e comece a receber solicitações</p>
+            </div>
+
+            <div id="servicosGrid" class="servicos-grid"></div>
+        </div>
+    </section>
+
+    <!-- Modal Adicionar/Editar Serviço -->
+    <div id="modalServico" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="modalTitle">Adicionar Serviço</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="formServico">
+                    <input type="hidden" id="servicoId" value="">
+
+                    <div class="form-group">
+                        <label for="titulo">Título do Serviço *</label>
+                        <input 
+                            type="text" 
+                            id="titulo" 
+                            name="titulo" 
+                            class="form-input"
+                            placeholder="Ex: Manicure e Pedicure Completa"
+                            required
+                            minlength="5"
+                        >
+                        <span class="form-error" id="tituloError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria">Categoria *</label>
+                        <select id="categoria" name="categoria" class="form-input" required>
+                            <option value="">Selecione uma categoria</option>
+                            <option value="Eletricista">Eletricista</option>
+                            <option value="Babá">Babá</option>
+                            <option value="Diarista">Diarista</option>
+                            <option value="Cozinheira">Cozinheira</option>
+                            <option value="Cuidadora de Idosos">Cuidadora de Idosos</option>
+                            <option value="Manicure">Manicure</option>
+                            <option value="Costureira">Costureira</option>
+                            <option value="Personal Trainer">Personal Trainer</option>
+                            <option value="Psicóloga">Psicóloga</option>
+                            <option value="Encanadora">Encanadora</option>
+                            <option value="Pintora">Pintora</option>
+                            <option value="Jardineira">Jardineira</option>
+                            <option value="Outra">Outra</option>
+                        </select>
+                        <span class="form-error" id="categoriaError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descricao">Descrição Detalhada *</label>
+                        <textarea 
+                            id="descricao" 
+                            name="descricao" 
+                            class="form-input form-textarea"
+                            placeholder="Descreva seu serviço, sua experiência, o que está incluso..."
+                            rows="5"
+                            required
+                            minlength="20"
+                        ></textarea>
+                        <span class="form-error" id="descricaoError"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="precoEstimado">Preço Estimado (R$)</label>
+                            <input 
+                                type="number" 
+                                id="precoEstimado" 
+                                name="precoEstimado" 
+                                class="form-input"
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="localizacao">Localização *</label>
+                            <input 
+                                type="text" 
+                                id="localizacao" 
+                                name="localizacao" 
+                                class="form-input"
+                                placeholder="Cidade"
+                                required
+                            >
+                            <span class="form-error" id="localizacaoError"></span>
+                        </div>
+                    </div>
+
+                    <div id="modalMessage"></div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" id="btnCancelar">Cancelar</button>
+                        <button type="submit" class="btn-primary" id="btnSalvar">
+                            <span id="btnSalvarText">Salvar Serviço</span>
+                            <span id="btnSalvarLoader" class="loader" style="display: none;"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/meus-servicos.js"></script>
+</body>
+</html>
