@@ -1,13 +1,13 @@
-# 🌸 EntreElas - Rede Feminina de Serviços
+# 🌸 ElasPodem- Rede Feminina de Serviços
 
-![Logo EntreElas](https://img.shields.io/badge/EntreElas-v1.0-E85D4E?style=for-the-badge&logo=heart)
+![Logo ElasPodem](https://img.shields.io/badge/ElasPodem-v1.0-E85D4E?style=for-the-badge&logo=heart)
 ![PHP](https://img.shields.io/badge/PHP-8.0+-777BB4?style=for-the-badge&logo=php)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=for-the-badge&logo=mysql)
 
 ## 📋 Sobre o Projeto
 
-**EntreElas** é uma plataforma web que conecta mulheres prestadoras de serviços com mulheres clientes, criando uma rede de apoio e empoderamento feminino. O objetivo é proporcionar um ambiente seguro e exclusivo para mulheres oferecerem e contratarem serviços diversos, fortalecendo a economia feminina e gerando networking.
+**ElasPodem** é uma plataforma web que conecta mulheres prestadoras de serviços com mulheres clientes, criando uma rede de apoio e empoderamento feminino. O objetivo é proporcionar um ambiente seguro e exclusivo para mulheres oferecerem e contratarem serviços diversos, fortalecendo a economia feminina e gerando networking.
 
 ### ✨ Diferenciais
 
@@ -462,7 +462,7 @@ Desenvolvido com 💜 para conectar mulheres através de serviços.
 ## 📞 Suporte
 
 Para dúvidas ou problemas:
-- 📧 Email: suporte@entreelas.com.br
+- 📧 Email: suporte@elaspodem.com.br
 - 💬 WhatsApp: (XX) XXXXX-XXXX
 
 ---
