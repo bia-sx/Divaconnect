@@ -61,24 +61,6 @@
     gap: 15px;
 }
 
-.dark-mode-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-.dark-mode-btn img {
-    width: 28px;
-    height: 28px;
-    transition: .3s;
-}
-
-.dark-mode-btn img:hover {
-    transform: scale(1.1);
-    opacity: .8;
-}
-
 
 .btn-entrar {
     padding: 10px 24px;

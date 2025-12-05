@@ -1,0 +1,413 @@
+/* ========================================
+   DARK MODE UNIVERSAL - DivaConnect
+   Funciona em todas as páginas
+======================================== */
+
+/* ========== TOGGLE BUTTON ========== */
+.dark-mode-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.dark-mode-toggle {
+  position: relative;
+  width: 60px;
+  height: 32px;
+  background: linear-gradient(135deg, #FFF5F3 0%, #FFE8E3 100%);
+  border: 2px solid #E85D4E;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  overflow: hidden;
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.05);
+}
+
+.dark-mode-toggle::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background-color: #E85D4E;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.dark-mode-toggle.dark {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  border-color: #FF9E8E;
+}
+
+.dark-mode-toggle.dark::before {
+  transform: translateX(28px);
+  background-color: #FF9E8E;
+}
+
+.toggle-icon {
+  font-size: 14px;
+  z-index: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.sun-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.moon-icon {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.dark-mode-toggle.dark .sun-icon {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.dark-mode-toggle.dark .moon-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ========== DARK MODE STYLES ========== */
+
+/* Evitar flash de conteúdo */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Variáveis de cores light mode (padrão) */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #FAFAFA;
+  --bg-hero: linear-gradient(135deg, #FFF5F3 0%, #FFE8E3 100%);
+  --text-primary: #1a1a1a;
+  --text-secondary: #666;
+  --text-tertiary: rgba(0,0,0,0.6);
+  --card-bg: #ffffff;
+  --card-hover-bg: #FFF5F3;
+  --border-color: #e5e5e5;
+  --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.1);
+}
+
+/* Variáveis de cores dark mode */
+.dark-mode {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2a2a2a;
+  --bg-hero: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: rgba(255,255,255,0.7);
+  --card-bg: #2a2a2a;
+  --card-hover-bg: #333333;
+  --border-color: rgba(255,255,255,0.1);
+  --shadow-sm: 0 2px 10px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* ========== APLICAR ESTILOS ========== */
+
+/* Body e fundos principais */
+.dark-mode {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Header */
+.dark-mode .header {
+  background-color: var(--bg-primary);
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dark-mode .logo-text {
+  color: var(--text-primary);
+}
+
+.dark-mode .nav-link {
+  color: var(--text-secondary);
+}
+
+.dark-mode .nav-link:hover {
+  color: #FF9E8E;
+}
+
+.dark-mode .btn-entrar {
+  color: var(--text-primary);
+}
+
+.dark-mode .btn-entrar:hover {
+  color: #FF9E8E;
+}
+
+.dark-mode .mobile-menu-toggle span {
+  background-color: var(--text-primary);
+}
+
+/* Hero Section */
+.dark-mode .hero {
+  background: var(--bg-hero);
+}
+
+.dark-mode .hero-title {
+  color: var(--text-primary);
+}
+
+.dark-mode .hero-description {
+  color: var(--text-secondary);
+}
+
+.dark-mode .social-proof-text {
+  color: var(--text-secondary);
+}
+
+.dark-mode .image-placeholder,
+.dark-mode .image-placeholder img {
+  background: var(--card-bg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Badge */
+.dark-mode .badge {
+  background-color: rgba(46, 125, 50, 0.2);
+  color: #81c784;
+}
+
+/* Como Funciona Section */
+.dark-mode .section-como-funciona {
+  background-color: var(--bg-secondary);
+}
+
+.dark-mode .section-title {
+  color: var(--text-primary);
+}
+
+.dark-mode .section-subtitle {
+  color: var(--text-secondary);
+}
+
+.dark-mode .step {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+.dark-mode .step-title {
+  color: var(--text-primary);
+}
+
+.dark-mode .step-description {
+  color: var(--text-secondary);
+}
+
+.dark-mode .step-icon {
+  background-color: rgba(232, 93, 78, 0.15);
+}
+
+/* Categorias Section */
+.dark-mode .section-categorias {
+  background-color: var(--bg-primary);
+}
+
+.dark-mode .categoria-card {
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+}
+
+.dark-mode .categoria-card:hover {
+  background-color: var(--card-hover-bg);
+  border-color: #FF9E8E;
+}
+
+.dark-mode .categoria-nome {
+  color: var(--text-primary);
+}
+
+.dark-mode .btn-ver-todos {
+  border-color: #FF9E8E;
+  color: #FF9E8E;
+}
+
+.dark-mode .btn-ver-todos:hover {
+  background-color: #FF9E8E;
+  color: #1a1a1a;
+}
+
+/* Segurança Section */
+.dark-mode .section-seguranca {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+}
+
+.dark-mode .stat-card {
+  background-color: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* CTA Section */
+.dark-mode .section-cta {
+  background-color: var(--bg-secondary);
+}
+
+.dark-mode .cta-title {
+  color: var(--text-primary);
+}
+
+.dark-mode .cta-description {
+  color: var(--text-secondary);
+}
+
+.dark-mode .btn-secondary-large {
+  border-color: #FF9E8E;
+  color: #FF9E8E;
+}
+
+.dark-mode .btn-secondary-large:hover {
+  background-color: #FF9E8E;
+  color: #1a1a1a;
+}
+
+/* Footer */
+.dark-mode .footer {
+  background-color: #0a0a0a;
+  border-top: 1px solid var(--border-color);
+}
+
+.dark-mode .footer-description,
+.dark-mode .footer-link {
+  color: var(--text-tertiary);
+}
+
+.dark-mode .footer-link:hover {
+  color: #FF9E8E;
+}
+
+.dark-mode .social-icon {
+  background-color: rgba(255,255,255,0.05);
+}
+
+.dark-mode .social-icon:hover {
+  background-color: #FF9E8E;
+}
+
+.dark-mode .footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: var(--text-tertiary);
+}
+
+/* ========== PÁGINAS DE LOGIN/CADASTRO ========== */
+
+/* Formulários */
+.dark-mode .form-container {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+}
+
+.dark-mode input[type="text"],
+.dark-mode input[type="email"],
+.dark-mode input[type="password"],
+.dark-mode input[type="tel"],
+.dark-mode select,
+.dark-mode textarea {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.dark-mode input::placeholder {
+  color: var(--text-secondary);
+}
+
+.dark-mode input:focus {
+  border-color: #FF9E8E;
+  background-color: var(--card-bg);
+}
+
+.dark-mode label {
+  color: var(--text-secondary);
+}
+
+/* Links */
+.dark-mode a {
+  color: #FF9E8E;
+}
+
+.dark-mode a:hover {
+  color: #ff7a66;
+}
+
+/* Cards e Containers */
+.dark-mode .card,
+.dark-mode .panel,
+.dark-mode .box {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+/* Textos gerais */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+  color: var(--text-primary);
+}
+
+.dark-mode p {
+  color: var(--text-secondary);
+}
+
+/* ========== TRANSIÇÕES SUAVES ========== */
+.dark-mode * {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Exceções - sem transição */
+.dark-mode .no-transition,
+.dark-mode img,
+.dark-mode video {
+  transition: none;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .dark-mode-toggle {
+    width: 50px;
+    height: 28px;
+  }
+  
+  .dark-mode-toggle::before {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .dark-mode-toggle.dark::before {
+    transform: translateX(22px);
+  }
+  
+  .toggle-icon {
+    font-size: 12px;
+  }
+
+  .dark-mode-toggle-wrapper {
+    margin-right: 10px;
+  }
+}
